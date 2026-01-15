@@ -97,7 +97,7 @@
 
     /* ================= HERO ================= */
     .hero{
-      padding:84px 0 64px;
+      padding:64px 0 52px; /* tightened vertical spacing */
       background:
         radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
         radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
@@ -132,7 +132,22 @@
 
     /* ================= SECTIONS ================= */
     section{padding:72px 0}
-    .sectionAlt{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .sectionAlt{
+      background:var(--soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      padding:28px 0;
+      text-align:center;
+    }
+    .stats strong{display:block;font-size:18px}
+    .stats span{font-size:13px;color:var(--muted)}
+
+    sectionAlt{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
     .sectionTone{
       background:
         radial-gradient(700px 420px at 80% 20%, rgba(14,165,233,.08), transparent 55%),
@@ -229,7 +244,10 @@
     .mapCard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}
 
     @media(max-width:900px){
-      .aboutGrid,.cards,.projGrid,.foot,.contactGrid{grid-template-columns:1fr}
+      .aboutGrid,.cards,.projGrid,.foot,.contactGrid,.stats{grid-template-columns:1fr}
+      nav{display:none}
+      .hero h1{font-size:34px}
+    }
       nav{display:none}
       .hero h1{font-size:36px}
     }
@@ -283,6 +301,17 @@
     <div class="heroActions">
       <a class="btn primary" href="#services">Our services</a>
       <a class="btn" href="#projects">View projects</a>
+    </div>
+  </div>
+</section>
+
+<section class="sectionAlt">
+  <div class="wrap">
+    <div class="stats">
+      <div><strong>Engineering‑led delivery</strong><span>Design intent aligned with site execution</span></div>
+      <div><strong>Specialist roofing</strong><span>ETFE · PTFE · Tensile systems</span></div>
+      <div><strong>UAE focused</strong><span>Dubai‑based contracting operations</span></div>
+      <div><strong>Execution governance</strong><span>QA/QC & HSE driven supervision</span></div>
     </div>
   </div>
 </section>
