@@ -18,12 +18,12 @@
       --shadow:0 12px 30px rgba(13,20,33,.08);
       --radius:22px;
       --max:1180px;
-      --navOffset: 180px; /* used for anchor scroll offset */
+      --navOffset: 120px; /* adjusted to avoid over-scroll */ /* used for anchor scroll offset */
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth; scroll-padding-top: var(--navOffset);} 
-    section{scroll-margin-top: var(--navOffset);}
+    section{scroll-margin-top: calc(var(--navOffset) - 20px);}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -367,7 +367,7 @@
           <a class="btn" href="mailto:contact@hartechs.com">Email</a>
         </div>
         <p style="margin:14px 0 0;">
-          <small style="color:var(--muted);"> 
+          <small style="color:var(--muted);"></small>
         </p>
       </div>
 
