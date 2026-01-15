@@ -178,6 +178,35 @@
     }
     .foot{
       display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .footBrand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .footBrand img{height:52px;width:auto;flex:0 0 auto}
+    .foot .name{font-weight:800}
+    .foot .ar{direction:rtl;font-weight:700;opacity:.85}
+    .foot small{color:var(--muted)}
+
+    /* Contact layout */
+    .contactGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .contactCard{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff;box-shadow:var(--shadow)}
+    .contactCard h3{margin:0 0 10px}
+    .contactCard p{margin:0 0 12px;color:var(--muted)}
+    .mapCard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+
+    @media(max-width:900px){
+      .aboutGrid,.cards,.projGrid,.foot,.contactGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hero h1{font-size:36px}
+    }
+
+    .foot{
+      display:grid;
       grid-template-columns:1.5fr 1fr;
       gap:24px;
     }
@@ -290,8 +319,41 @@
   <div class="wrap">
     <div class="sectionHead">
       <h2>Contact</h2>
+      <p>Reach out for enquiries, capability discussions, and project coordination.</p>
     </div>
-    <p><strong>Himayat Alrabi Building Contracting L.L.C</strong><br/>39, M2 Floor, Burj Al Nahar Complex, Muteena, Dubai<br/>+971 50 179 8483 · contact@hartechs.com</p>
+
+    <div class="contactGrid">
+      <div class="contactCard">
+        <h3>Himayat Alrabi Building Contracting L.L.C</h3>
+        <p>
+          39, M2 Floor, Burj Al Nahar Complex,<br/>
+          Muteena, Dubai, UAE
+        </p>
+        <p>
+          <strong>Phone:</strong> <a href="tel:+971501798483">+971 50 179 8483</a><br/>
+          <strong>Email:</strong> <a href="mailto:contact@hartechs.com">contact@hartechs.com</a>
+        </p>
+        <div class="heroActions">
+          <a class="btn primary" href="tel:+971501798483">Call</a>
+          <a class="btn" href="mailto:contact@hartechs.com">Email</a>
+        </div>
+        <p style="margin:14px 0 0;">
+          <small style="color:var(--muted);">Note: Email domain will be updated to @har.ae after website approval.</small>
+        </p>
+      </div>
+
+      <div class="mapCard" aria-label="Map">
+        <iframe
+          title="Burj Al Nahar Complex Map"
+          width="100%"
+          height="360"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Burj%20Al%20Nahar%20Complex%20Muteena%20Dubai&output=embed">
+        </iframe>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -299,14 +361,21 @@
 
 <footer>
   <div class="wrap foot">
-    <div>
-      <div class="name">Himayat Alrabi Building Contracting L.L.C</div>
-      <div class="ar">حماية الربيع لمقاولات البناء ذ.م.م</div>
-      <small>© <span id="y"></span> All rights reserved</small>
+    <div class="footBrand">
+      <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none'" />
+      <div>
+        <div class="name">Himayat Alrabi Building Contracting L.L.C</div>
+        <div class="ar">حماية الربيع لمقاولات البناء ذ.م.م</div>
+        <small>© <span id="y"></span> All rights reserved</small>
+      </div>
     </div>
-    <div>
-      <small>Dubai, UAE</small><br/>
-      <small>On-ground excellence. International expertise.</small>
+
+    <div style="text-align:right;">
+      <small>39, M2 Floor, Burj Al Nahar Complex</small><br/>
+      <small>Muteena, Dubai, UAE</small><br/>
+      <small><a href="tel:+971501798483">+971 50 179 8483</a></small><br/>
+      <small><a href="mailto:contact@hartechs.com">contact@hartechs.com</a></small><br/>
+      <small style="display:block;margin-top:8px;">On-ground excellence. International expertise.</small>
     </div>
   </div>
 </footer>
