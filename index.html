@@ -97,7 +97,7 @@
 
     /* ================= HERO ================= */
     .hero{
-      padding:64px 0 52px;
+      padding:52px 0 44px; /* reduced whitespace */
       background:
         radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
         radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
@@ -147,13 +147,16 @@
     .heroActions{display:flex;gap:14px;flex-wrap:wrap}
 
     /* ================= SECTIONS ================= */
-    section{padding:72px 0}
+    section{padding:56px 0} /* reduced whitespace */
     /* Section separators */
     section+section:before{
       content:"";
       display:block;
       height:1px;
-      margin:-36px auto 36px;
+      margin:-26px auto 26px;
+      max-width:880px;
+      background:linear-gradient(90deg, transparent, rgba(14,165,233,.25), rgba(245,158,11,.25), transparent);
+    }
       max-width:880px;
       background:linear-gradient(90deg, transparent, rgba(14,165,233,.25), rgba(245,158,11,.25), transparent);
     }
@@ -215,10 +218,24 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
       grid-template-columns:repeat(3,1fr);
       gap:18px;
     }
+
+    /* tighter defaults */
+    .wrap{padding:0 20px}
+
+    /* keep existing below */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
     .card{
       border:1px solid rgba(15,23,42,.08);
       border-radius:var(--radius);
-      padding:24px;
+      padding:20px;
+      background:linear-gradient(180deg,#ffffff, #fbfcfe);
+      box-shadow:0 14px 34px rgba(13,20,33,.08);
+      position:relative;
+    }
       background:linear-gradient(180deg,#ffffff, #fbfcfe);
       box-shadow:0 14px 34px rgba(13,20,33,.08);
       position:relative;
@@ -317,8 +334,8 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
       position:relative;
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      grid-template-rows:repeat(2,160px);
-      gap:16px;
+      grid-template-rows:repeat(2,148px);
+      gap:12px;
     }
     .heroMosaic .mosaic{
       border-radius:18px;
@@ -530,37 +547,36 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
 
     <div class="sectionHead" style="text-align:left">
       <h2>Leadership & Execution Team</h2>
-      <p>Focused leadership and on-ground execution strength supporting safe, compliant, and reliable delivery.</p>
+      <p>Focused leadership supporting safe, compliant, and reliable delivery across civil, steel, and specialised roofing works.</p>
     </div>
 
-    <div class="teamGrid">
+    <div class="cards" style="grid-template-columns:1fr; gap:18px; margin-top:18px;">
 
-      <div class="teamCard">
-        <div class="role">Structural Engineering & Design Oversight</div>
-        <h3>Sujith David John</h3>
-        <p class="title">Lead Structural Consultant</p>
-        <p>Responsible for engineering governance, design intent control, and technical coordination across civil, steel, and specialist roofing works. Provides international design experience and ensures alignment between design and execution.</p>
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-sujith.jpg" alt="Sujith David John" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Sujith David John</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Founder & Technical Oversight</p>
+          <p style="margin:0; color:var(--muted);">Provides engineering oversight, constructability input and technical coordination, ensuring design intent is translated into disciplined site execution.</p>
+        </div>
       </div>
 
-      <div class="teamCard">
-        <div class="role">Tensile, Fabric & Steel Structures</div>
-        <h3>Joyson Isac</h3>
-        <p class="title">Tensile Fabric & Steel Structure Specialist</p>
-        <p>Leads specialist tensile membrane and steel structure installations, with extensive international project experience across ETFE, PTFE, PVC, and mesh systems.</p>
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-joyson.jpg" alt="Joyson Isac" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Joyson Isac</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Director – Tensile & Specialist Roofing</p>
+          <p style="margin:0; color:var(--muted);">Leads specialised tensile and membrane roofing execution, with extensive international experience across ETFE, PTFE and fabric systems.</p>
+        </div>
       </div>
 
-      <div class="teamCard">
-        <div class="role">Engineering Advisory & Project Oversight</div>
-        <h3>Johnson David</h3>
-        <p class="title">Senior Engineering Consultant</p>
-        <p>Provides senior-level advisory support across multidisciplinary engineering and project execution, ensuring technical robustness, compliance, and delivery integrity.</p>
-      </div>
-
-      <div class="teamCard">
-        <div class="role">Electrical Execution & Site Supervision</div>
-        <h3>Sajeev A</h3>
-        <p class="title">Senior Electrical Supervisor</p>
-        <p>Oversees on-site electrical execution, coordination, and supervision across maintenance, fit-out, and construction projects, ensuring quality and regulatory compliance.</p>
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-johnson.jpg" alt="Johnson David" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Johnson David</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Senior Advisor – Projects & Delivery</p>
+          <p style="margin:0; color:var(--muted);">Supports execution governance, quality oversight and delivery integrity across multidisciplinary construction and technical works.</p>
+        </div>
       </div>
 
     </div>
