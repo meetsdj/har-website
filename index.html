@@ -33,6 +33,12 @@
       padding-top: 84px;
     }
     a{color:inherit}
+    .arabic{
+              font-size:12px;
+              color:var(--muted);
+              letter-spacing:0;
+              line-height:1.2;
+            }
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
     .nav{
         position:fixed;
@@ -54,10 +60,13 @@
       min-width: 220px;
     }
     .brand img{
-      width:56px; height:56px; border-radius:14px; background:var(--soft);
-      border:1px solid var(--line);
-      object-fit:contain;
-      padding:6px;
+        width:68px;
+        height:68px;
+        border-radius:16px;
+        background:var(--soft);
+        border:1px solid var(--line);
+        object-fit:contain;
+        padding:6px;
     }
     .brandTitle{
       display:flex; flex-direction:column; gap:2px;
@@ -292,7 +301,9 @@
       display:flex; gap:12px; align-items:flex-start;
     }
     .footLeft img{
-      width:48px; height:48px; border-radius:14px;
+      width:58px;
+      height:58px;
+      border-radius:16px;
       border:1px solid var(--line);
       background:var(--soft);
       object-fit:contain;
@@ -333,6 +344,7 @@
         <div class="brandTitle">
           <strong>HAR</strong>
           <span>Himayat Alrabi Building Contracting L.L.C</span>
+           <span class="arabic" lang="ar" dir="rtl">حماية الربيع لمقاولت البناء ذ.م.م</span>
         </div>
       </a>
 
@@ -629,6 +641,7 @@
         <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none';" />
         <div>
           <strong>Himayat Alrabi Building Contracting L.L.C</strong>
+          <span class="arabic" lang="ar" dir="rtl">حماية الربيع لمقاولت البناء ذ.م.م</span>
           <span>Engineering-led building contracting in Dubai.</span>
           <span class="mutedSmall">© <span id="y"></span> HAR. All rights reserved.</span>
         </div>
