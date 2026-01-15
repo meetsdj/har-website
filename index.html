@@ -173,16 +173,7 @@
       box-shadow:0 14px 34px rgba(13,20,33,.08);
       position:relative;
     }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:18px; top:18px;
-      width:10px; height:10px;
-      border-radius:999px;
-      background:var(--blue);
-      box-shadow:0 0 0 6px rgba(14,165,233,.12);
-      opacity:.9;
-    }
+    
     .card h3{margin:0 0 8px}
     .card p{margin:0;color:var(--muted)}
 
@@ -359,14 +350,45 @@
 
 <section id="team" class="sectionTone">
   <div class="wrap">
-    <div class="sectionHead">
-      <h2>Our team</h2>
-      <p>Hands-on leadership, disciplined supervision and specialist crews for civil works and tensile roofing.</p>
+    <div class="sectionHead" style="text-align:center; max-width:820px; margin:0 auto 40px;">
+      <h2>Leadership & Execution Team</h2>
+      <p>Focused leadership and on-ground execution strength supporting safe, compliant and reliable delivery.</p>
     </div>
-    <div class="cards">
-      <div class="card"><h3>Leadership</h3><p>Engineering-led management with clear accountability and consultant-friendly coordination.</p></div>
-      <div class="card"><h3>Site engineers & supervisors</h3><p>On-ground execution control, progress planning, QA/QC checks and reporting.</p></div>
-      <div class="card"><h3>Specialist roofing technicians</h3><p>Experienced tensile/membrane crews including IRATA-certified technicians (project dependent).</p></div>
+
+    <div class="cards" style="grid-template-columns:1fr; max-width:900px; margin:0 auto;">
+
+      <div class="card" style="display:grid; grid-template-columns:120px 1fr; gap:24px; align-items:center;">
+        <img src="sujith.jpg" alt="Sujith David John" style="width:120px; height:120px; border-radius:50%; object-fit:cover;" />
+        <div>
+          <h3 style="margin:0;">Sujith David John</h3>
+          <p style="margin:4px 0 8px; font-weight:600;">Founder & Engineering Lead</p>
+          <p style="margin:0; color:var(--muted);">Provides engineering oversight and constructability direction, aligning design intent with site execution across HAR’s contracting operations.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:120px 1fr; gap:24px; align-items:center;">
+        <img src="joyson.jpg" alt="Joyson Isac" style="width:120px; height:120px; border-radius:50%; object-fit:cover;" />
+        <div>
+          <h3 style="margin:0;">Joyson Isac</h3>
+          <p style="margin:4px 0 8px; font-weight:600;">Director – Tensile Roofing</p>
+          <p style="margin:0; color:var(--muted);">Leads specialised tensile and membrane roofing execution, with extensive international experience in ETFE, PTFE and fabric systems.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:120px 1fr; gap:24px; align-items:center;">
+        <img src="johnson.jpg" alt="Johnson David" style="width:120px; height:120px; border-radius:50%; object-fit:cover;" />
+        <div>
+          <h3 style="margin:0;">Johnson David</h3>
+          <p style="margin:4px 0 8px; font-weight:600;">Senior Advisor – Projects & Execution</p>
+          <p style="margin:0; color:var(--muted);">Supports delivery strategy, quality oversight and execution governance across civil, steel and specialist works.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Site engineers, supervisors & specialist crews</h3>
+        <p style="margin:8px 0 0; color:var(--muted);">Experienced site engineers, supervisors, IRATA-certified technicians and trade teams delivering civil, steel, roofing and maintenance works across the UAE.</p>
+      </div>
+
     </div>
   </div>
 </section>
