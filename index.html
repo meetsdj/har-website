@@ -43,6 +43,7 @@
       background:rgba(255,255,255,.92);
       backdrop-filter:blur(10px);
       border-bottom:1px solid rgba(15,23,42,.08);
+      box-shadow:0 6px 18px rgba(13,20,33,.06);
     }
     .nav{
       display:grid;
@@ -96,11 +97,24 @@
 
     /* ================= HERO ================= */
     .hero{
-      padding:80px 0 60px;
+      padding:84px 0 64px;
       background:
-        radial-gradient(800px 420px at 15% 10%, rgba(14,165,233,.14), transparent 60%),
-        radial-gradient(900px 420px at 90% 0%, rgba(245,158,11,.12), transparent 55%);
+        radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #fbfcfe 60%, #ffffff 100%);
       border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:auto -20% -120px -20%;
+      height:240px;
+      background:linear-gradient(90deg, rgba(14,165,233,.10), rgba(245,158,11,.08));
+      filter:blur(40px);
+      opacity:.6;
+      pointer-events:none;
     }
     .hero h1{
       font-size:46px;
@@ -117,7 +131,16 @@
     .heroActions{display:flex;gap:14px;flex-wrap:wrap}
 
     /* ================= SECTIONS ================= */
-    section{padding:64px 0}
+    section{padding:72px 0}
+    .sectionAlt{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .sectionTone{
+      background:
+        radial-gradient(700px 420px at 80% 20%, rgba(14,165,233,.08), transparent 55%),
+        radial-gradient(700px 420px at 10% 10%, rgba(245,158,11,.07), transparent 55%),
+        var(--soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
     .sectionHead{max-width:720px;margin-bottom:32px}
     .sectionHead h2{font-size:30px;margin:0 0 10px}
     .sectionHead p{margin:0;color:var(--muted)}
@@ -129,10 +152,11 @@
       gap:24px;
     }
     .box{
-      background:var(--soft);
-      border:1px solid var(--line);
+      background:linear-gradient(180deg, #ffffff, #fbfcfe);
+      border:1px solid rgba(15,23,42,.08);
       border-radius:var(--radius);
       padding:24px;
+      box-shadow:0 12px 28px rgba(13,20,33,.06);
     }
 
     /* ================= SERVICES ================= */
@@ -142,11 +166,22 @@
       gap:18px;
     }
     .card{
-      border:1px solid var(--line);
+      border:1px solid rgba(15,23,42,.08);
       border-radius:var(--radius);
       padding:24px;
-      box-shadow:var(--shadow);
-      background:#fff;
+      background:linear-gradient(180deg,#ffffff, #fbfcfe);
+      box-shadow:0 14px 34px rgba(13,20,33,.08);
+      position:relative;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      left:18px; top:18px;
+      width:10px; height:10px;
+      border-radius:999px;
+      background:var(--blue);
+      box-shadow:0 0 0 6px rgba(14,165,233,.12);
+      opacity:.9;
     }
     .card h3{margin:0 0 8px}
     .card p{margin:0;color:var(--muted)}
@@ -165,8 +200,9 @@
     .proj{
       border-radius:18px;
       overflow:hidden;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(180deg,#ffffff,#fbfcfe);
+      box-shadow:0 14px 34px rgba(13,20,33,.08);
     }
     .proj img{width:100%;display:block}
     .proj .meta{padding:14px}
@@ -291,7 +327,7 @@
   </div>
 </section>
 
-<section id="services">
+<section id="services" class="sectionTone">
   <div class="wrap">
     <div class="sectionHead">
       <h2>Services</h2>
@@ -307,7 +343,7 @@
   </div>
 </section>
 
-<section id="projects" class="projects">
+<section id="projects" class="sectionAlt">
   <div class="wrap">
     <div class="sectionHead">
       <h2>Selected projects</h2>
@@ -321,7 +357,7 @@
   </div>
 </section>
 
-<section id="team">
+<section id="team" class="sectionTone">
   <div class="wrap">
     <div class="sectionHead">
       <h2>Our team</h2>
@@ -335,7 +371,7 @@
   </div>
 </section>
 
-<section id="quality">
+<section id="quality" class="sectionAlt">
   <div class="wrap">
     <div class="sectionHead">
       <h2>Quality & HSE</h2>
@@ -344,7 +380,7 @@
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="sectionTone">
   <div class="wrap">
     <div class="sectionHead">
       <h2>Contact</h2>
