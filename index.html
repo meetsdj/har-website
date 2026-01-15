@@ -312,7 +312,35 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
     .nav{display:grid}
     nav{display:flex}
     @media(max-width:900px){ nav{display:none} }
-  </style>
+      /* Hero mosaic */
+    .heroMosaic{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      grid-template-rows:repeat(2,160px);
+      gap:16px;
+    }
+    .heroMosaic .mosaic{
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 18px 40px rgba(13,20,33,.18);
+      background:#fff;
+    }
+    .heroMosaic img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(.95) contrast(1.02);
+    }
+    .heroMosaic .a{grid-column:1 / span 2;}
+    .heroMosaic .b{grid-column:1;}
+    .heroMosaic .c{grid-column:2;}
+
+    @media(max-width:900px){
+      .heroMosaic{display:none}
+    }
+
+</style>
 </head>
 
 <body>
@@ -340,13 +368,25 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
 <main>
 
 <section class="hero">
-  <div class="wrap">
-    <h1>Engineering-led building contracting in Dubai</h1>
-    <p>We deliver civil construction, specialised roofing, architectural steel and technical building works — supported by international engineering depth and disciplined site execution.</p>
-    <div class="heroActions">
-      <a class="btn primary" href="#services">Our services</a>
-      <a class="btn" href="#projects">View projects</a>
+  <div class="wrap" style="display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;">
+
+    <!-- Hero text -->
+    <div>
+      <h1>Engineering-led building contracting in Dubai</h1>
+      <p>We deliver civil construction, specialised roofing, architectural steel and technical building works — supported by international engineering depth and disciplined site execution.</p>
+      <div class="heroActions">
+        <a class="btn primary" href="#services">Our services</a>
+        <a class="btn" href="#projects">View projects</a>
+      </div>
     </div>
+
+    <!-- Static project mosaic -->
+    <div class="heroMosaic">
+      <div class="mosaic a"><img src="hero-tensile.jpg" alt="Tensile roofing project"></div>
+      <div class="mosaic b"><img src="hero-steel.jpg" alt="Architectural steel works"></div>
+      <div class="mosaic c"><img src="hero-site.jpg" alt="On-site execution"></div>
+    </div>
+
   </div>
 </section>
 
