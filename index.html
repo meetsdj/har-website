@@ -46,45 +46,54 @@
     .nav{
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 9999;
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(15,23,42,0.06);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15,23,42,0.08);
 }
-    .navInner{
+.navInner{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding: 14px 0;
-  overflow: visible; /* key */
+  padding: 10px 0;      /* reduce space */
+  overflow: visible;
 }
-    .brand{
+    
+
+/* Brand */
+.brand{
   display:flex;
   align-items:center;
   gap: 12px;
-  min-height: 60px;  /* gives room */
-  overflow: visible; /* key */
+  overflow: visible;
 }
-    .brand img{
-  height: 44px;      /* adjust 40–52 as needed */
+
+/* Logo sizing */
+.brand img{
+  height: 46px;         /* bump logo size */
   width: auto;
   display:block;
   object-fit: contain;
 }
-    .brandTitle{
+
+/* Brand text sizing */
+.brandTitle{
   display:flex;
   flex-direction:column;
   line-height:1.15;
 }
-    .brandTitle .brand-en{
-  font-weight:700;      /* bolder */
-  color:#0b1220;
-  font-size:14px;
+
+.brandTitle .brand-en{
+  font-weight: 800;
+  font-size: 18px;      /* bigger */
+  color: #0b1220;
 }
-    .brandTitle .brand-ar{
-  font-weight:600;      /* bolder but slightly lighter than EN */
-  font-size:13px;
-  opacity:0.9;          /* keep readable */
+
+.brandTitle .brand-ar{
+  font-weight: 700;
+  font-size: 15px;      /* bigger */
+  opacity: 0.85;
 }
     .brand-en {
   font-weight: 600;
@@ -94,6 +103,23 @@
 .brand-ar {
   font-size: 12px;
   opacity: 0.75;
+}
+    /* Nav links bigger so they don't look tiny next to the hero */
+.nav a, .nav button{
+  font-size: 15px;
+}
+
+/* Menu links (if you have a nav list class) */
+.navLinks a{
+  font-weight: 600;
+  padding: 10px 12px;
+}
+
+/* Call / Get in touch button sizing */
+.nav .btn, .nav .pill, .nav .cta{
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
 }
     .brandTitle strong{font-size:14px; letter-spacing:0.02em}
     .brandTitle span{font-size:12px; color:var(--muted)}
@@ -315,24 +341,94 @@
       background: #fff;
       padding:26px 0;
     }
+    /* --- FOOTER FIX --- */
+.footer{
+  border-top: 1px solid rgba(15,23,42,0.08);
+  padding: 26px 0;
+  background: #fff;
+}
+
+.footer .footerInner{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 24px;
+}
+
+.footer .footerBrand{
+  display:flex;
+  gap: 14px;
+  align-items:flex-start;
+}
+
+.footer .footerBrand img{
+  height: 44px;
+  width: auto;
+}
+
+.footer .footerBrandText{
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+}
+
+.footer .footerBrandText .name{
+  font-weight:800;
+  font-size:16px;
+}
+
+.footer .footerBrandText .tagline{
+  color:#475569;
+}
+
+.footer .footerBrandText .copy{
+  color:#64748b;
+  font-size:13px;
+}
     .footGrid{
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap:16px;
-      align-items:flex-start;
-    }
-    .footLeft{
-      display:flex; gap:12px; align-items:flex-start;
-    }
-    .footLeft img{
-      width:58px;
-      height:58px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:var(--soft);
-      object-fit:contain;
-      padding:6px;
-    }
+  display:flex;
+  justify-content:space-between;
+  gap: 24px;
+}
+   .footLeft{
+  display:flex;
+  gap: 14px;
+  align-items:flex-start;
+}
+
+.footLeft img{
+  height: 44px;
+  width: auto;
+  display:block;
+  object-fit: contain;
+}
+    .footBrandText{
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+  line-height: 1.25;
+}
+
+.footName{
+  font-weight: 800;
+  font-size: 16px;
+  color:#0b1220;
+}
+
+.footArabic{
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.footTagline{
+  color:#475569;
+}
+
+.footCopy{
+  margin-top: 6px;
+  color:#64748b;
+  font-size: 13px;
+}
     .footLeft strong{display:block}
     .footLeft span{display:block; color:var(--muted); font-size:13px; margin-top:4px}
     .footRight{
@@ -412,7 +508,7 @@
               <strong>Disciplined execution. Clear documentation. Reliable delivery.</strong>
               <div class="mutedSmall">A calm, compliance-driven approach aligned with UAE standards.</div>
             </div>
-            <span>HAR</span>
+            
           </div>
         </div>
 
@@ -663,15 +759,18 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap footGrid">
-      <div class="footLeft">
-        <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none';" />
-        <div>
-          <strong>Himayat Alrabi Building Contracting L.L.C</strong>
-          <span class="arabic" lang="ar" dir="rtl">حماية الربيع لمقاولت البناء ذ.م.م</span>
-          <span>Engineering-led building contracting in Dubai.</span>
-          <span class="mutedSmall">© <span id="y"></span> HAR. All rights reserved.</span>
+  <footer class="footer">
+  <div class="wrap footGrid">
+    <div class="footLeft">
+      <img src="har-logo.png" alt="Himayat Alrabi logo" onerror="this.style.display='none';" />
+      <div class="footBrandText">
+        <strong class="footName">Himayat Alrabi Building Contracting L.L.C</strong>
+        <span class="arabic footArabic" lang="ar" dir="rtl">حماية الربيع لمقاولات البناء ذ.م.م</span>
+
+        <span class="footTagline">Engineering-led building contracting in Dubai.</span>
+
+        <span class="mutedSmall footCopy">
+          © <span id="y"></span> Himayat Alrabi Building Contracting L.L.C. All rights reserved.</span>
         </div>
       </div>
 
