@@ -191,17 +191,17 @@
     .miniRow strong{display:block; font-size:13px; margin-bottom:2px}
     .miniRow span{display:block; font-size:13px; color:var(--muted)}
     .section{padding:44px 0}
-    .sectionHeader{
+    .section{
       display:flex; align-items:flex-end; justify-content:space-between;
       gap:20px;
       margin-bottom:18px;
     }
-    .sectionHeader h2{
+    .section h2{
       margin:0;
       font-size:26px;
       letter-spacing:-0.01em;
     }
-    .sectionHeader p{
+    .section p{
       margin:0;
       color:var(--muted);
       max-width: 62ch;
@@ -336,17 +336,23 @@
 </head>
 
 <body>
-  <header class="nav">
+  <div class="nav">
     <div class="wrap navInner">
-      <a class="brand" href="#top" aria-label="HAR Home">
-        <!-- Update this filename later when we add the logo file to GitHub -->
-        <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none';" />
+      <a class="brand" href="#top" aria-label="Himayat Alrabi Home">
+        <!-- Logo -->
+        <img src="har-logo.png" alt="Himayat Alrabi Building Contracting LLC logo"
+             onerror="this.style.display='none';" />
+
+        <!-- Brand text -->
         <div class="brandTitle">
-          <strong>HAR</strong>
-          <span>Himayat Alrabi Building Contracting L.L.C</span>
-           <span class="arabic" lang="ar" dir="rtl">حماية الربيع لمقاولت البناء ذ.م.م</span>
+          <span class="brand-en">Himayat Alrabi Building Contracting L.L.C</span>
+          <span class="brand-ar" lang="ar" dir="rtl">
+            حماية الربيع لمقاولات البناء ذ.م.م
+          </span>
         </div>
       </a>
+    </div>
+  </div>
 
       <nav class="menu" aria-label="Primary">
         <a href="#about">About</a>
