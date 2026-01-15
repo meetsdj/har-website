@@ -267,6 +267,12 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
       nav{display:none}
       .hero h1{font-size:36px}
     }
+  
+    /* SAFETY OVERRIDES: ensure header/nav stays visible even if an earlier CSS block is malformed */
+    header{display:block}
+    .nav{display:grid}
+    nav{display:flex}
+    @media(max-width:900px){ nav{display:none} }
   </style>
 </head>
 
