@@ -18,10 +18,12 @@
       --shadow:0 12px 30px rgba(13,20,33,.08);
       --radius:22px;
       --max:1180px;
+      --navOffset: 180px; /* used for anchor scroll offset */
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth; scroll-padding-top: var(--navOffset);} 
+    section{scroll-margin-top: var(--navOffset);}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -238,6 +240,7 @@
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
+      <a href="#team">Our team</a>
       <a href="#quality">Quality & HSE</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -263,14 +266,26 @@
       <h2>Who we are</h2>
       <p>An engineering-driven contractor bridging design intent and site execution for reliable, compliant delivery.</p>
     </div>
+
     <div class="aboutGrid">
       <div class="box">
         <strong>Engineering backbone</strong>
-        <p>Born from the same engineering DNA as Signature Engineering Solutions, our work is grounded in constructability, clarity and control.</p>
+        <p>Born from the same engineering DNA as Signature Engineering Solutions, our work is grounded in constructability, clarity and execution control.</p>
       </div>
       <div class="box">
         <strong>How we operate</strong>
-        <p>Clear scope, disciplined supervision and transparent coordination with clients and consultants.</p>
+        <p>Clear scope definition, disciplined supervision, and transparent coordination with clients, consultants, and authorities.</p>
+      </div>
+    </div>
+
+    <div class="aboutGrid" style="margin-top:24px;">
+      <div class="box">
+        <strong>Our vision</strong>
+        <p>To be a trusted name in Dubai’s civil construction and specialised roofing sector, recognised for quality, precision, and professional integrity.</p>
+      </div>
+      <div class="box">
+        <strong>Our mission</strong>
+        <p>To deliver reliable, regulation-compliant construction works through a blend of on-ground execution strength and international engineering expertise.</p>
       </div>
     </div>
   </div>
@@ -302,6 +317,20 @@
       <div class="proj"><img src="proj1.jpg" alt="Project" /><div class="meta"><strong>Galadari Ventures</strong><span>Warehouse blockwork – Dubai</span></div></div>
       <div class="proj"><img src="proj2.jpg" alt="Project" /><div class="meta"><strong>Tensile Roofing</strong><span>Specialised fabric installation</span></div></div>
       <div class="proj"><img src="proj3.jpg" alt="Project" /><div class="meta"><strong>Engineering Support</strong><span>Design-to-build coordination</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2>Our team</h2>
+      <p>Hands-on leadership, disciplined supervision and specialist crews for civil works and tensile roofing.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Leadership</h3><p>Engineering-led management with clear accountability and consultant-friendly coordination.</p></div>
+      <div class="card"><h3>Site engineers & supervisors</h3><p>On-ground execution control, progress planning, QA/QC checks and reporting.</p></div>
+      <div class="card"><h3>Specialist roofing technicians</h3><p>Experienced tensile/membrane crews including IRATA-certified technicians (project dependent).</p></div>
     </div>
   </div>
 </section>
@@ -360,22 +389,16 @@
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div class="footBrand">
-      <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none'" />
-      <div>
-        <div class="name">Himayat Alrabi Building Contracting L.L.C</div>
-        <div class="ar">حماية الربيع لمقاولات البناء ذ.م.م</div>
-        <small>© <span id="y"></span> All rights reserved</small>
+  <div class="wrap">
+    <div class="foot" style="grid-template-columns:1fr;">
+      <div class="footBrand" style="justify-content:center;">
+        <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none'" />
+        <div style="text-align:center;">
+          <div class="name">Himayat Alrabi Building Contracting L.L.C</div>
+          <div class="ar" style="text-align:center;">حماية الربيع لمقاولات البناء ذ.م.م</div>
+          <small>© <span id="y"></span> All rights reserved</small>
+        </div>
       </div>
-    </div>
-
-    <div style="text-align:right;">
-      <small>39, M2 Floor, Burj Al Nahar Complex</small><br/>
-      <small>Muteena, Dubai, UAE</small><br/>
-      <small><a href="tel:+971501798483">+971 50 179 8483</a></small><br/>
-      <small><a href="mailto:contact@hartechs.com">contact@hartechs.com</a></small><br/>
-      <small style="display:block;margin-top:8px;">On-ground excellence. International expertise.</small>
     </div>
   </div>
 </footer>
