@@ -23,7 +23,10 @@
     :root { scroll-padding-top: 64px; }
     section { scroll-margin-top: 64px; }
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html, body{
+  height: auto !important;
+  overflow-y: auto !important;
+}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -69,8 +72,20 @@
   object-fit: contain;
 }
     .brandTitle{
-      display:flex; flex-direction:column; line-height: 1.2;gap:2px;
-    }
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
+    .brandTitle .brand-en{
+  font-weight:700;      /* bolder */
+  color:#0b1220;
+  font-size:14px;
+}
+    .brandTitle .brand-ar{
+  font-weight:600;      /* bolder but slightly lighter than EN */
+  font-size:13px;
+  opacity:0.9;          /* keep readable */
+}
     .brand-en {
   font-weight: 600;
   font-size: 14px;
