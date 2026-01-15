@@ -97,7 +97,7 @@
 
     /* ================= HERO ================= */
     .hero{
-      padding:64px 0 52px; /* tightened vertical spacing */
+      padding:64px 0 52px;
       background:
         radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
         radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
@@ -105,6 +105,21 @@
       border-bottom:1px solid var(--line);
       position:relative;
       overflow:hidden;
+    }
+    /* Hero abstract engineering grid */
+    .hero:before{
+      content:"";
+      position:absolute;
+      right:-10%;
+      top:10%;
+      width:520px;
+      height:360px;
+      background:
+        linear-gradient(transparent 95%, rgba(15,23,42,.06) 96%),
+        linear-gradient(90deg, transparent 95%, rgba(15,23,42,.06) 96%);
+      background-size:40px 40px;
+      opacity:.25;
+      pointer-events:none;
     }
     .hero:after{
       content:"";
@@ -119,7 +134,8 @@
     .hero h1{
       font-size:46px;
       line-height:1.08;
-      letter-spacing:-.02em;
+      letter-spacing:-0.02em;
+      font-weight:900;
       margin:0 0 14px;
     }
     .hero p{
@@ -132,6 +148,15 @@
 
     /* ================= SECTIONS ================= */
     section{padding:72px 0}
+    /* Section separators */
+    section+section:before{
+      content:"";
+      display:block;
+      height:1px;
+      margin:-36px auto 36px;
+      max-width:880px;
+      background:linear-gradient(90deg, transparent, rgba(14,165,233,.25), rgba(245,158,11,.25), transparent);
+    }
     ..sectionAlt{
       background:var(--soft);
       border-top:1px solid var(--line);
@@ -157,7 +182,17 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
       border-bottom:1px solid var(--line);
     }
     .sectionHead{max-width:720px;margin-bottom:32px}
-    .sectionHead h2{font-size:30px;margin:0 0 10px}
+    .sectionHead h2{
+      font-size:30px;
+      letter-spacing:-0.015em;
+      margin:0 0 10px;
+      font-weight:800;
+    }
+    .sectionHead p{
+      font-size:15px;
+      color:var(--muted);
+      max-width:70ch;
+    }
     .sectionHead p{margin:0;color:var(--muted)}
 
     /* ================= ABOUT ================= */
@@ -189,7 +224,11 @@ background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid 
       position:relative;
     }
     
-    .card h3{margin:0 0 8px}
+    .card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:700;
+    }
     .card p{margin:0;color:var(--muted)}
 
     /* ================= PROJECTS ================= */
