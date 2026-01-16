@@ -87,6 +87,11 @@
       border:1px solid var(--line);
       font-weight:600;
       font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
     }
     .btn.primary{
       background:linear-gradient(135deg,var(--blue),#38bdf8);
@@ -248,6 +253,69 @@
     .proj strong{display:block}
     .proj span{font-size:13px;color:var(--muted)}
 
+    /* ================= CLIENTS STRIP ================= */
+    .clientsStrip{
+      background:#ffffff;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .clientsRow{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:stretch;
+      justify-content:center;
+    }
+    .clientBadge{
+      flex: 1 1 200px;
+      max-width:260px;
+      min-width:200px;
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:18px;
+      background:linear-gradient(180deg,#ffffff,#fbfcfe);
+      box-shadow:0 12px 28px rgba(13,20,33,.06);
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .clientLogo{
+      width:58px;
+      height:38px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .clientLogo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      filter:grayscale(1);
+      opacity:.9;
+    }
+    .clientBadge:hover .clientLogo img{filter:grayscale(.25);opacity:1}
+    .clientName{
+      font-weight:800;
+      font-size:14px;
+      line-height:1.25;
+    }
+    .clientNote{
+      font-size:12.5px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .clientFallback{
+      font-weight:900;
+      color:#0b1220;
+      font-size:12px;
+      opacity:.65;
+    }
+
     /* ================= FOOTER ================= */
     footer{
       padding:40px 0;
@@ -305,6 +373,7 @@
       nav{display:none}
       .hero h1{font-size:34px}
       .heroMosaic{display:none}
+      .clientBadge{max-width:100%}
     }
   </style>
 </head>
@@ -320,11 +389,12 @@
       <div class="tagline">On-ground excellence. International expertise.</div>
     </div>
 
-    <!-- ✅ CLEAN NAV (fixed) -->
+    <!-- ✅ CLEAN NAV (updated: added Our clients) -->
     <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
+      <a href="#clients">Our clients</a>
       <a href="#team">Our team</a>
       <a href="#quality">Quality & HSE</a>
       <a href="#contact">Contact</a>
@@ -341,9 +411,14 @@
     <div>
       <h1>Engineering-led building contracting in Dubai</h1>
       <p>We deliver civil construction, specialised roofing, architectural steel and technical building works — supported by international engineering depth and disciplined site execution.</p>
+
+      <!-- ✅ UPDATED HERO CTAs -->
       <div class="heroActions">
-        <a class="btn primary" href="#services">Our services</a>
-        <a class="btn" href="#projects">View projects</a>
+        <a class="btn primary"
+           href="mailto:contact@hartechs.com?subject=Request%20for%20Quotation%20-%20HAR&body=Hello%20HAR%20team%2C%0D%0A%0D%0AI%20would%20like%20to%20request%20a%20quotation%20for%20the%20following%20scope%3A%0D%0A%0D%0A-%20Project%20name%20%2F%20location%3A%0D%0A-%20Scope%20summary%3A%0D%0A-%20Target%20start%20date%3A%0D%0A-%20Contact%20name%20%26%20number%3A%0D%0A%0D%0AThank%20you.%0D%0A">
+          Request a quote
+        </a>
+        <a class="btn" href="tel:+971501798483">Call +971 50 179 8483</a>
       </div>
     </div>
 
@@ -464,6 +539,70 @@
       <div class="proj"><img src="proj2.jpg" alt="Project" /><div class="meta"><strong>Tensile Roofing</strong><span>Specialised fabric installation</span></div></div>
       <div class="proj"><img src="proj3.jpg" alt="Project" /><div class="meta"><strong>Engineering Support</strong><span>Design-to-build coordination</span></div></div>
     </div>
+  </div>
+</section>
+
+<!-- ✅ NEW: OUR CLIENTS STRIP (logos + names fallback) -->
+<section id="clients" class="clientsStrip" aria-label="Our clients">
+  <div class="wrap">
+    <div class="sectionHead" style="text-align:center; max-width:860px; margin-left:auto; margin-right:auto;">
+      <h2>Our clients</h2>
+      <p>A selection of clients and industry partners we’ve supported through contracting and specialist delivery.</p>
+    </div>
+
+    <div class="clientsRow" style="margin-top:18px;">
+      <!-- Put your logo files in the same folder. If a logo is missing, the name still shows cleanly. -->
+      <div class="clientBadge">
+        <div class="clientLogo">
+          <img src="client-galadari.png" alt="Galadari Ventures LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;clientFallback&quot;>LOGO</span>';">
+        </div>
+        <div>
+          <div class="clientName">Galadari Ventures LLC</div>
+          <div class="clientNote">Dubai, UAE</div>
+        </div>
+      </div>
+
+      <div class="clientBadge">
+        <div class="clientLogo">
+          <img src="client-taiyo.png" alt="Taiyo Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;clientFallback&quot;>LOGO</span>';">
+        </div>
+        <div>
+          <div class="clientName">Taiyo Middle East LLC</div>
+          <div class="clientNote">UAE</div>
+        </div>
+      </div>
+
+      <div class="clientBadge">
+        <div class="clientLogo">
+          <img src="client-structurflex.png" alt="Structurflex Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;clientFallback&quot;>LOGO</span>';">
+        </div>
+        <div>
+          <div class="clientName">Structurflex Middle East LLC</div>
+          <div class="clientNote">UAE</div>
+        </div>
+      </div>
+
+      <div class="clientBadge">
+        <div class="clientLogo">
+          <img src="client-waterinmotion.png" alt="Water in Motion LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;clientFallback&quot;>LOGO</span>';">
+        </div>
+        <div>
+          <div class="clientName">Water in Motion LLC</div>
+          <div class="clientNote">UAE</div>
+        </div>
+      </div>
+
+      <div class="clientBadge">
+        <div class="clientLogo">
+          <img src="client-dubaiholding.png" alt="Dubai Holding logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;clientFallback&quot;>LOGO</span>';">
+        </div>
+        <div>
+          <div class="clientName">Dubai Holding</div>
+          <div class="clientNote">Dubai, UAE</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
