@@ -936,10 +936,10 @@
   // Footer year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // ===== Per-project mini carousels (cycles only through images that actually exist) =====
+// ===== Synced per-project mini carousels =====
   (function(){
-    const cards = document.querySelectorAll('.projMedia[data-images]');
-    const INTERVAL_MS = 2600;
+    const cards = Array.from(document.querySelectorAll('.projMedia[data-images]'));
+    const INTERVAL_MS = 3200;              // ✅ set your desired lag here
     const PLACEHOLDER = 'proj-placeholder.jpg';
 
     function preload(src){
@@ -951,69 +951,74 @@
       });
     }
 
-    cards.forEach(async (wrap) => {
+    // Build a per-card state (only real images; 0 => placeholder; 1 => no cycle)
+    const states = [];
+
+    Promise.all(cards.map(async (wrap) => {
       const imgEl = wrap.querySelector('img');
       const dotsWrap = wrap.querySelector('.projDots');
       if(!imgEl || !dotsWrap) return;
 
-      const requested = (wrap.getAttribute('data-images') || '')
+      const requested = (wrap.dataset.images || '')
         .split(',')
         .map(s => s.trim())
         .filter(Boolean);
 
       const results = await Promise.all(requested.map(preload));
       const okImages = results.filter(r => r.ok).map(r => r.src);
+      const images = okImages.length ? okImages : [PLACEHOLDER];
 
-      // If nothing exists -> show placeholder only (no cycling)
-      const finalImages = okImages.length ? okImages : [PLACEHOLDER];
-
-      // Never allow infinite onerror loops
+      // safe fallback (no infinite onerror loop)
       imgEl.onerror = function(){
         this.onerror = null;
         this.src = PLACEHOLDER;
       };
 
-      // Set initial image
-      imgEl.src = finalImages[0];
+      // initial paint
+      imgEl.src = images[0];
 
-      // Build dots
+      // dots
       dotsWrap.innerHTML = '';
-      finalImages.forEach((_, i) => {
+      images.forEach((_, i) => {
         const d = document.createElement('span');
         d.className = 'projDot' + (i === 0 ? ' active' : '');
         dotsWrap.appendChild(d);
       });
 
-      // If only 1 valid image -> do not cycle
-      if(finalImages.length <= 1) return;
-
       const dots = Array.from(dotsWrap.children);
-      let idx = 0;
-      let timer = null;
 
-      function goNext(){
-        idx = (idx + 1) % finalImages.length;
-        imgEl.style.opacity = '0.35';
-        setTimeout(() => {
-          imgEl.src = finalImages[idx];
-          imgEl.style.opacity = '1';
-          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-        }, 140);
-      }
+      states.push({
+        wrap,
+        imgEl,
+        dots,
+        images,
+        idx: 0,
+        paused: false
+      });
+    })).then(() => {
+      // If you hover any card, pause only that card (optional)
+      states.forEach(s => {
+        s.wrap.addEventListener('mouseenter', () => s.paused = true);
+        s.wrap.addEventListener('mouseleave', () => s.paused = false);
+      });
 
-      function start(){
-        if(timer) return;
-        timer = setInterval(goNext, INTERVAL_MS);
-      }
-      function stop(){
-        if(!timer) return;
-        clearInterval(timer);
-        timer = null;
-      }
+      // Global synced tick
+      setInterval(() => {
+        states.forEach(s => {
+          // only cycle if 2+ images and not paused
+          if(s.paused) return;
+          if(s.images.length <= 1) return;
 
-      wrap.addEventListener('mouseenter', stop);
-      wrap.addEventListener('mouseleave', start);
-      start();
+          s.idx = (s.idx + 1) % s.images.length;
+
+          s.imgEl.style.opacity = '0.35';
+          setTimeout(() => {
+            s.imgEl.src = s.images[s.idx];
+            s.imgEl.style.opacity = '1';
+            s.dots.forEach((d, i) => d.classList.toggle('active', i === s.idx));
+          }, 140);
+        });
+      }, INTERVAL_MS);
     });
   })();
 </script>
