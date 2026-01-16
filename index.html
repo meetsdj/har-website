@@ -788,6 +788,38 @@ header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-8px) rotate(-
     flex:0 1 auto;
   }
 }
+    /* ===== Spacing tighten (override) ===== */
+
+/* Header a bit shorter */
+header{ padding: 14px 0; }
+.brand .en{ margin-top: 6px; }
+.brand .ar{ margin-top: 6px; }
+.taglineRow{ margin-top: 6px; }
+
+/* Hero: reduce top/bottom whitespace */
+.hero{ padding: 34px 0 28px; }
+
+/* Reduce big gaps between sections */
+section{ padding: 52px 0; }            /* was likely 72/80 */
+.section{ padding: 52px 0; }           /* if you use .section wrapper */
+
+/* Value props band (the 4 columns) – tighten */
+.band, .strip, .valueBand, .featuresBand{
+  padding: 26px 0;                     /* was likely 40+ */
+}
+
+/* Reduce the “separator” style gaps (those pale bands) */
+.divider, .sectionDivider, hr{
+  margin: 18px 0;
+}
+
+/* Cards area spacing (Vision/Mission etc.) */
+.grid{ gap: 16px; }                    /* reduce airy gaps */
+.card{ padding: 18px; }                /* slightly tighter */
+
+/* Reduce top margin before big headings like “Services” */
+h2{ margin: 0 0 12px; }
+h3{ margin: 0 0 10px; }
   </style>
 </head>
 
