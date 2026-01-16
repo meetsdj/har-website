@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Himayat Alrabi Building Contracting L.L.C | HAR</title>
-  <meta name="description" content="Engineering-led building contracting in Dubai. Civil construction, specialist roofing, architectural steel and technical works." />
+  <meta name="description" content="On-ground excellence. International expertise. Engineering-led building contracting in Dubai." />
 
   <style>
     :root{
@@ -18,14 +18,15 @@
       --shadow:0 12px 30px rgba(13,20,33,.08);
       --radius:22px;
       --max:1180px;
-      --navOffset:120px;
+      --navOffset: 120px; /* adjusted to avoid over-scroll */ /* used for anchor scroll offset */
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:var(--navOffset)}
+    html{scroll-behavior:smooth; scroll-padding-top: var(--navOffset);}
+    section{scroll-margin-top: calc(var(--navOffset) - 20px);}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--ink);
       background:var(--bg);
       line-height:1.55;
@@ -59,12 +60,16 @@
       gap:6px;
       text-align:center;
     }
-    .brand img{height:64px}
+    .brand img{height:64px;width:auto}
     .brand .en{font-weight:900;font-size:22px}
     .brand .ar{font-weight:800;font-size:16px;opacity:.85;direction:rtl}
     .brand .tagline{font-size:13px;color:var(--muted)}
 
-    nav{display:flex;gap:18px}
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
     nav a{
       font-weight:600;
       color:var(--muted);
@@ -73,30 +78,9 @@
     }
     nav a:hover{background:var(--soft);color:var(--ink)}
 
-    /* ================= HERO ================= */
-    .hero{
-      padding:52px 0;
-      background:
-        radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
-        linear-gradient(180deg,#fff,#fbfcfe 60%,#fff);
-      border-bottom:1px solid var(--line);
+    .cta{
+      display:flex;gap:10px
     }
-    .hero h1{
-      font-size:46px;
-      line-height:1.08;
-      letter-spacing:-.02em;
-      font-weight:900;
-      margin:0 0 14px;
-    }
-    .hero p{
-      max-width:65ch;
-      color:var(--muted);
-      font-size:17px;
-      margin:0 0 26px;
-    }
-    .heroActions{display:flex;gap:14px}
-
     .btn{
       padding:10px 14px;
       border-radius:14px;
@@ -106,54 +90,221 @@
     }
     .btn.primary{
       background:linear-gradient(135deg,var(--blue),#38bdf8);
-      border:none;
       color:#062033;
+      border:none;
       box-shadow:0 10px 24px rgba(14,165,233,.25);
     }
 
+    /* ================= HERO ================= */
+    .hero{
+      padding:52px 0 44px; /* reduced whitespace */
+      background:
+        radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #fbfcfe 60%, #ffffff 100%);
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    /* Hero abstract engineering grid */
+    .hero:before{
+      content:"";
+      position:absolute;
+      right:-10%;
+      top:10%;
+      width:520px;
+      height:360px;
+      background:
+        linear-gradient(transparent 95%, rgba(15,23,42,.06) 96%),
+        linear-gradient(90deg, transparent 95%, rgba(15,23,42,.06) 96%);
+      background-size:40px 40px;
+      opacity:.25;
+      pointer-events:none;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:auto -20% -120px -20%;
+      height:240px;
+      background:linear-gradient(90deg, rgba(14,165,233,.10), rgba(245,158,11,.08));
+      filter:blur(40px);
+      opacity:.6;
+      pointer-events:none;
+    }
+    .hero h1{
+      font-size:46px;
+      line-height:1.08;
+      letter-spacing:-0.02em;
+      font-weight:900;
+      margin:0 0 14px;
+    }
+    .hero p{
+      max-width:65ch;
+      color:var(--muted);
+      font-size:17px;
+      margin:0 0 26px;
+    }
+    .heroActions{display:flex;gap:14px;flex-wrap:wrap}
+
     /* ================= SECTIONS ================= */
-    section{padding:56px 0}
-    .sectionAlt{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    section{padding:56px 0} /* reduced whitespace */
+    /* Section separators */
+    section+section:before{
+      content:"";
+      display:block;
+      height:1px;
+      margin:-26px auto 26px;
+      max-width:880px;
+      background:linear-gradient(90deg, transparent, rgba(14,165,233,.25), rgba(245,158,11,.25), transparent);
+    }
+
+    .sectionAlt{
+      background:var(--soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      padding:28px 0;
+      text-align:center;
+    }
+    .stats strong{display:block;font-size:18px}
+    .stats span{font-size:13px;color:var(--muted)}
+
+    .sectionTone{
+      background:
+        radial-gradient(700px 420px at 80% 20%, rgba(14,165,233,.08), transparent 55%),
+        radial-gradient(700px 420px at 10% 10%, rgba(245,158,11,.07), transparent 55%),
+        var(--soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
     .sectionHead{max-width:720px;margin-bottom:32px}
-    .sectionHead h2{font-size:30px;margin:0 0 10px;font-weight:800}
+    .sectionHead h2{
+      font-size:30px;
+      letter-spacing:-0.015em;
+      margin:0 0 10px;
+      font-weight:800;
+    }
     .sectionHead p{margin:0;color:var(--muted)}
 
-    /* ================= CARDS ================= */
+    /* ================= ABOUT ================= */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+    .box{
+      background:linear-gradient(180deg, #ffffff, #fbfcfe);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:0 12px 28px rgba(13,20,33,.06);
+    }
+
+    /* ================= SERVICES ================= */
     .cards{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
     }
     .card{
-      background:#fff;
       border:1px solid rgba(15,23,42,.08);
       border-radius:var(--radius);
       padding:20px;
+      background:linear-gradient(180deg,#ffffff, #fbfcfe);
       box-shadow:0 14px 34px rgba(13,20,33,.08);
+      position:relative;
     }
-    .card h3{margin:0 0 8px;font-size:18px}
+    .card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:700;
+    }
     .card p{margin:0;color:var(--muted)}
 
-    /* ================= STATS ================= */
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-      text-align:center;
+    /* ================= PROJECTS ================= */
+    .projects{
+      background:var(--soft);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
     }
-    .stats strong{display:block;font-size:18px}
-    .stats span{font-size:13px;color:var(--muted)}
+    .projGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .proj{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(180deg,#ffffff,#fbfcfe);
+      box-shadow:0 14px 34px rgba(13,20,33,.08);
+    }
+    .proj img{width:100%;display:block}
+    .proj .meta{padding:14px}
+    .proj strong{display:block}
+    .proj span{font-size:13px;color:var(--muted)}
 
     /* ================= FOOTER ================= */
     footer{
       padding:40px 0;
       border-top:1px solid var(--line);
     }
+    .foot{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .footBrand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .footBrand img{height:52px;width:auto;flex:0 0 auto}
+    .foot .name{font-weight:800}
+    .foot .ar{direction:rtl;font-weight:700;opacity:.85}
+    .foot small{color:var(--muted)}
+
+    /* Contact layout */
+    .contactGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .contactCard{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff;box-shadow:var(--shadow)}
+    .contactCard h3{margin:0 0 10px}
+    .contactCard p{margin:0 0 12px;color:var(--muted)}
+    .mapCard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+
+    /* Hero mosaic */
+    .heroMosaic{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      grid-template-rows:repeat(2,148px);
+      gap:12px;
+    }
+    .heroMosaic .mosaic{
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 18px 40px rgba(13,20,33,.18);
+      background:#fff;
+    }
+    .heroMosaic img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(.95) contrast(1.02);
+    }
+    .heroMosaic .a{grid-column:1 / span 2;}
+    .heroMosaic .b{grid-column:1;}
+    .heroMosaic .c{grid-column:2;}
 
     @media(max-width:900px){
+      .aboutGrid,.cards,.projGrid,.foot,.contactGrid,.stats{grid-template-columns:1fr}
       nav{display:none}
-      .cards,.stats{grid-template-columns:1fr}
       .hero h1{font-size:34px}
+      .heroMosaic{display:none}
     }
   </style>
 </head>
@@ -163,12 +314,13 @@
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <img src="har-logo.png" alt="HAR logo">
+      <img src="har-logo.png" alt="HAR logo" />
       <div class="en">Himayat Alrabi Building Contracting L.L.C</div>
       <div class="ar">حماية الربيع لمقاولات البناء ذ.م.م</div>
       <div class="tagline">On-ground excellence. International expertise.</div>
     </div>
 
+    <!-- ✅ CLEAN NAV (fixed) -->
     <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -182,27 +334,33 @@
 
 <main>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="wrap">
-    <h1>Engineering-led building contracting in Dubai</h1>
-    <p>
-      We deliver civil construction, specialised roofing, architectural steel and
-      technical building works — supported by international engineering depth and
-      disciplined site execution.
-    </p>
-    <div class="heroActions">
-      <a class="btn primary" href="#services">Our services</a>
-      <a class="btn" href="#projects">View projects</a>
+  <div class="wrap" style="display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;">
+
+    <!-- Hero text -->
+    <div>
+      <h1>Engineering-led building contracting in Dubai</h1>
+      <p>We deliver civil construction, specialised roofing, architectural steel and technical building works — supported by international engineering depth and disciplined site execution.</p>
+      <div class="heroActions">
+        <a class="btn primary" href="#services">Our services</a>
+        <a class="btn" href="#projects">View projects</a>
+      </div>
     </div>
+
+    <!-- Static project mosaic -->
+    <div class="heroMosaic">
+      <div class="mosaic a"><img src="hero-tensile.jpg" alt="Tensile roofing project"></div>
+      <div class="mosaic b"><img src="hero-steel.jpg" alt="Architectural steel works"></div>
+      <div class="mosaic c"><img src="hero-site.jpg" alt="On-site execution"></div>
+    </div>
+
   </div>
 </section>
 
-<!-- CAPABILITIES -->
-<section class="sectionAlt">
+<section class="sectionAlt" aria-label="Capabilities at a glance">
   <div class="wrap">
     <div class="stats">
-      <div><strong>Engineering-led delivery</strong><span>Design intent aligned to site execution</span></div>
+      <div><strong>Engineering-led delivery</strong><span>Design intent aligned with site execution</span></div>
       <div><strong>Specialist roofing</strong><span>ETFE · PTFE · Tensile systems</span></div>
       <div><strong>UAE focused</strong><span>Dubai-based contracting operations</span></div>
       <div><strong>Execution governance</strong><span>QA/QC & HSE driven supervision</span></div>
@@ -210,7 +368,148 @@
   </div>
 </section>
 
-<!-- QUALITY & HSE -->
+<section id="about">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2>Who we are</h2>
+      <p>An engineering-driven contractor bridging design intent and site execution for reliable, compliant delivery.</p>
+    </div>
+
+    <div class="aboutGrid">
+      <div class="box">
+        <strong>Engineering backbone</strong>
+        <p>Built on strong engineering foundations with international project exposure across the UK, Middle East, and India, our work is grounded in constructability, clarity, and disciplined execution control.</p>
+      </div>
+      <div class="box">
+        <strong>How we operate</strong>
+        <p>Clear scope definition, disciplined supervision, and transparent coordination with clients, consultants, and authorities.</p>
+      </div>
+    </div>
+
+    <div class="aboutGrid" style="margin-top:24px;">
+      <div class="box">
+        <strong>Our vision</strong>
+        <p>To be a trusted name in Dubai’s civil construction and specialised roofing sector, recognised for quality, precision, and professional integrity.</p>
+      </div>
+      <div class="box">
+        <strong>Our mission</strong>
+        <p>To deliver reliable, regulation-compliant construction works through a blend of on-ground execution strength and international engineering expertise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="sectionTone">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2>Services</h2>
+      <p>Engineering-led contracting services supported by specialist technical and site execution capabilities.</p>
+    </div>
+
+    <h3 style="margin:40px 0 18px; text-align:center; font-weight:800;">Primary Contracting Services</h3>
+    <div style="max-width:220px; height:3px; margin:8px auto 22px; background:linear-gradient(90deg, rgba(14,165,233,.35), rgba(245,158,11,.35)); border-radius:4px;"></div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Civil Construction & Structural Works</h3>
+        <p>Execution of residential and commercial building works including structural, blockwork, and associated civil packages, delivered with engineering oversight and site discipline.</p>
+      </div>
+      <div class="card">
+        <h3>Tensile & Membrane Roofing Systems</h3>
+        <p>Specialised installation of ETFE, PTFE, and tensile fabric systems, supported by experienced teams and IRATA-certified technicians with international project exposure.</p>
+      </div>
+      <div class="card">
+        <h3>Architectural & Structural Steel Works</h3>
+        <p>Fabrication and installation of architectural steel elements, secondary steel structures, and bespoke steel packages aligned with design intent and site constraints.</p>
+      </div>
+      <div class="card">
+        <h3>Project Execution, QA/QC & Site Management</h3>
+        <p>On-ground supervision, quality control procedures, and execution governance aligned with UAE regulations, consultant requirements, and authority approvals.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:48px 0 18px; text-align:center; font-weight:800;">Specialised Technical & Support Services</h3>
+    <div style="max-width:260px; height:3px; margin:8px auto 22px; background:linear-gradient(90deg, rgba(14,165,233,.35), rgba(245,158,11,.35)); border-radius:4px;"></div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>MEP & Electromechanical Support Works</h3>
+        <p>Execution support for HVAC, electrical, and electromechanical systems, coordinated with civil and architectural works to ensure constructability and interface clarity.</p>
+      </div>
+      <div class="card">
+        <h3>Interior Finishing & Fit-Out Works</h3>
+        <p>Wall and floor tiling, carpentry, false ceilings, partitions, and related finishing works delivered under controlled supervision and coordinated sequencing.</p>
+      </div>
+      <div class="card">
+        <h3>Maintenance, Renovation & Refurbishment</h3>
+        <p>Planned and reactive maintenance, renovation, and refurbishment works for residential, commercial, and operational facilities.</p>
+      </div>
+      <div class="card">
+        <h3>Skilled Manpower & Specialist Trade Support</h3>
+        <p>Provision of experienced site technicians and specialist trade teams supporting civil, steel, roofing, electrical, and finishing scopes.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects" class="sectionAlt">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2>Selected projects</h2>
+      <p>A snapshot of our civil, roofing and engineering-led works.</p>
+    </div>
+    <div class="projGrid">
+      <div class="proj"><img src="proj1.jpg" alt="Project" /><div class="meta"><strong>Galadari Ventures</strong><span>Warehouse blockwork – Dubai</span></div></div>
+      <div class="proj"><img src="proj2.jpg" alt="Project" /><div class="meta"><strong>Tensile Roofing</strong><span>Specialised fabric installation</span></div></div>
+      <div class="proj"><img src="proj3.jpg" alt="Project" /><div class="meta"><strong>Engineering Support</strong><span>Design-to-build coordination</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="sectionTone">
+  <div class="wrap">
+
+    <div class="sectionHead" style="text-align:left">
+      <h2>Leadership & Execution Team</h2>
+      <p>Focused leadership supporting safe, compliant, and reliable delivery across civil, steel, and specialised roofing works.</p>
+    </div>
+
+    <div class="cards" style="grid-template-columns:1fr; gap:18px; margin-top:18px;">
+
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-sujith.jpg" alt="Sujith David John" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Sujith David John</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Founder & Technical Oversight</p>
+          <p style="margin:0; color:var(--muted);">Provides engineering oversight, constructability input and technical coordination, ensuring design intent is translated into disciplined site execution.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-joyson.jpg" alt="Joyson Isac" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Joyson Isac</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Director – Tensile & Specialist Roofing</p>
+          <p style="margin:0; color:var(--muted);">Leads specialised tensile and membrane roofing execution, with extensive international experience across ETFE, PTFE and fabric systems.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
+        <img src="leader-johnson.jpg" alt="Johnson David" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <div>
+          <h3 style="margin:0;">Johnson David</h3>
+          <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Senior Advisor – Projects & Delivery</p>
+          <p style="margin:0; color:var(--muted);">Supports execution governance, quality oversight and delivery integrity across multidisciplinary construction and technical works.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ✅ UPDATED QUALITY & HSE (tiles + cleaner wording) -->
 <section id="quality" class="sectionAlt">
   <div class="wrap">
     <div class="sectionHead">
@@ -221,27 +520,66 @@
     <div class="cards">
       <div class="card">
         <h3>QA/QC Governance</h3>
-        <p>Quality control procedures aligned with UAE consultant and authority requirements, focused on workmanship, sequencing, and compliance.</p>
+        <p>Quality control procedures aligned with UAE consultant and authority requirements, focused on workmanship, sequencing, and compliance at site level.</p>
       </div>
 
       <div class="card">
         <h3>Method Statements & ITPs</h3>
-        <p>Method statements, ITPs, and inspection workflows integrated into daily site activities rather than treated as paperwork exercises.</p>
+        <p>Method statements, ITPs, and inspection workflows integrated into daily site activity — not treated as paperwork exercises.</p>
       </div>
 
       <div class="card">
         <h3>On-Site Supervision</h3>
-        <p>Disciplined supervision ensuring construction follows approved drawings, specifications, and agreed execution sequences.</p>
+        <p>Disciplined supervision ensuring works follow approved drawings, specifications, and agreed execution sequences.</p>
       </div>
 
       <div class="card">
         <h3>Practical HSE Enforcement</h3>
-        <p>Health & safety driven by real risk identification and control on site — not box-ticking.</p>
+        <p>Health & safety driven by real risk identification and control on site, not box-ticking or retrospective documentation.</p>
       </div>
 
       <div class="card">
         <h3>Responsibility & Reporting</h3>
-        <p>Clear responsibility allocation, structured reporting, and defined corrective action workflows.</p>
+        <p>Clear responsibility allocation, structured reporting, and defined corrective action workflows for quality and safety observations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sectionTone">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2>Contact</h2>
+      <p>Reach out for enquiries, capability discussions, and project coordination.</p>
+    </div>
+
+    <div class="contactGrid">
+      <div class="contactCard">
+        <h3>Himayat Alrabi Building Contracting L.L.C</h3>
+        <p>
+          39, M2 Floor, Burj Al Nahar Complex,<br/>
+          Muteena, Dubai, UAE
+        </p>
+        <p>
+          <strong>Phone:</strong> <a href="tel:+971501798483">+971 50 179 8483</a><br/>
+          <strong>Email:</strong> <a href="mailto:contact@hartechs.com">contact@hartechs.com</a>
+        </p>
+        <div class="heroActions">
+          <a class="btn primary" href="tel:+971501798483">Call</a>
+          <a class="btn" href="mailto:contact@hartechs.com">Email</a>
+        </div>
+      </div>
+
+      <div class="mapCard" aria-label="Map">
+        <iframe
+          title="Burj Al Nahar Complex Map"
+          width="100%"
+          height="360"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Burj%20Al%20Nahar%20Complex%20Muteena%20Dubai&output=embed">
+        </iframe>
       </div>
     </div>
   </div>
@@ -250,16 +588,22 @@
 </main>
 
 <footer>
-  <div class="wrap" style="text-align:center">
-    <strong>Himayat Alrabi Building Contracting L.L.C</strong><br>
-    <span style="direction:rtl;display:block">حماية الربيع لمقاولات البناء ذ.م.م</span>
-    <small>© <span id="y"></span> All rights reserved</small>
+  <div class="wrap">
+    <div class="foot" style="grid-template-columns:1fr;">
+      <div class="footBrand" style="justify-content:center;">
+        <img src="har-logo.png" alt="HAR logo" onerror="this.style.display='none'" />
+        <div style="text-align:center;">
+          <div class="name">Himayat Alrabi Building Contracting L.L.C</div>
+          <div class="ar" style="text-align:center;">حماية الربيع لمقاولات البناء ذ.م.م</div>
+          <small>© <span id="y"></span> All rights reserved</small>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
 
 <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
+  document.getElementById('y').textContent=new Date().getFullYear()
 </script>
-
 </body>
 </html>
