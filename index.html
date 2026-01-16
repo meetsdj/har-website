@@ -292,46 +292,6 @@
 .projMeta span{font-size:13px;color:var(--muted)}
 
 /* ================= PROJECTS CAROUSEL ================= */
-.carousel{
-  position:relative;
-  border:1px solid rgba(15,23,42,.10);
-  border-radius:22px;
-  overflow:hidden;
-  background:#fff;
-  box-shadow:0 18px 44px rgba(13,20,33,.10);
-  margin:18px 0 22px;
-}
-
-.carouselTrack{
-  display:flex;
-  transition:transform 520ms cubic-bezier(.2,.9,.2,1);
-  will-change:transform;
-}
-
-.slide{
-  min-width:100%;
-  position:relative;
-  height:340px;
-  background:#fff;
-}
-
-.slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  filter:saturate(.95) contrast(1.02);
-}
-
-.slideOverlay{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:18px 18px 16px;
-  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.62) 100%);
-  color:#fff;
-}
 
 .slideOverlay .kicker{
   font-size:12px;
@@ -354,48 +314,6 @@
   max-width:72ch;
 }
 
-.carBtn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(15,23,42,.45);
-  backdrop-filter:blur(10px);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-}
-.carBtn:hover{background:rgba(15,23,42,.65)}
-.carPrev{left:12px}
-.carNext{right:12px}
-
-.dots{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:12px;
-  display:flex;
-  gap:8px;
-  padding:8px 10px;
-  border-radius:999px;
-  background:rgba(15,23,42,.35);
-  backdrop-filter:blur(10px);
-}
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:999px;
-  background:rgba(255,255,255,.55);
-  border:0;
-  cursor:pointer;
-}
-.dot.active{background:#fff}
 
 @media(max-width:900px){
   .slide{height:260px}
@@ -808,7 +726,7 @@
     <div class="cards" style="grid-template-columns:1fr; gap:18px; margin-top:18px;">
 
       <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
-        <img src="leader-sujith.jpg" alt="Sujith David John" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <img src="leader-sujith.jpg" alt="Sujith David John" style="width:104px; height:104px; border-radius:18px; object-fit:cover;object-position: center top; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
         <div>
           <h3 style="margin:0;">Sujith David John</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Founder & Technical Oversight</p>
@@ -817,7 +735,7 @@
       </div>
 
       <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
-        <img src="leader-joyson.jpg" alt="Joyson Isac" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <img src="leader-joyson.jpg" alt="Joyson Isac" style="width:104px; height:104px; border-radius:18px; object-fit:cover;object-position: center top; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
         <div>
           <h3 style="margin:0;">Joyson Isac</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Director – Tensile & Specialist Roofing</p>
@@ -826,7 +744,7 @@
       </div>
 
       <div class="card" style="display:grid; grid-template-columns:104px 1fr; gap:18px; align-items:center;">
-        <img src="leader-johnson.jpg" alt="Johnson David" style="width:104px; height:104px; border-radius:18px; object-fit:cover; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
+        <img src="leader-johnson.jpg" alt="Johnson David" style="width:104px; height:104px; border-radius:18px; object-fit:cover;object-position: center top; background:linear-gradient(180deg,#e9eef7,#f6f8fb); border:1px solid rgba(15,23,42,.08);" onerror="this.style.opacity='.35'" />
         <div>
           <h3 style="margin:0;">Johnson David</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Senior Advisor – Projects & Delivery</p>
@@ -1023,79 +941,5 @@
   })();
 </script>
 
-  
-
-  <script>
-  // Per-card mini carousels (independent)
-  (function(){
-    const cards = document.querySelectorAll('.projMedia[data-images]');
-    const INTERVAL_MS = 2600;
-
-    cards.forEach((wrap) => {
-      const img = wrap.querySelector('img');
-      const dotsWrap = wrap.querySelector('.projDots');
-      const list = (wrap.getAttribute('data-images') || '')
-        .split(',')
-        .map(s => s.trim())
-        .filter(Boolean);
-
-      if (!img || list.length <= 1) {
-        // still render 1 dot if you want, but we can skip
-        if (dotsWrap && list.length === 1) {
-          dotsWrap.innerHTML = '<span class="projDot active"></span>';
-        }
-        return;
-      }
-
-      let idx = 0;
-      let t = null;
-
-      // dots
-      dotsWrap.innerHTML = '';
-      list.forEach((_, i) => {
-        const d = document.createElement('span');
-        d.className = 'projDot' + (i === 0 ? ' active' : '');
-        dotsWrap.appendChild(d);
-      });
-      const dots = Array.from(dotsWrap.children);
-
-      function render(){
-        img.style.opacity = '0.35';
-        setTimeout(() => {
-          img.src = list[idx];
-          img.onerror = function(){
-            this.onerror = null;
-            this.src = 'proj-placeholder.jpg';
-          };
-          img.style.opacity = '1';
-          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-        }, 140);
-      }
-
-      function next(){
-        idx = (idx + 1) % list.length;
-        render();
-      }
-
-      function start(){
-        if (t) return;
-        t = setInterval(next, INTERVAL_MS);
-      }
-
-      function stop(){
-        if (!t) return;
-        clearInterval(t);
-        t = null;
-      }
-
-      // pause on hover
-      wrap.addEventListener('mouseenter', stop);
-      wrap.addEventListener('mouseleave', start);
-
-      // start cycling
-      start();
-    });
-  })();
-</script>
 </body>
 </html>
