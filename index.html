@@ -375,28 +375,41 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:16px;
-      align-items:start;
+      align-items:stretch; /* key: both columns match height */
     }
-
+    
     .contactCard{
       border:1px solid rgba(15,23,42,.08);
       border-radius:24px;
       padding:18px;
       background:#fff;
       box-shadow:0 10px 22px rgba(13,20,33,.06);
+    
+      display:flex;            /* allow button row to sit at bottom */
+      flex-direction:column;
+      height:100%;
     }
-
-    .contactCard p{color:var(--muted)}
-
+    
+    .contactCard .heroActions{
+      margin-top:auto;         /* pushes Call/Email buttons down */
+    }
+    
     .mapCard{
       border:1px solid rgba(15,23,42,.08);
       border-radius:24px;
       overflow:hidden;
       background:#fff;
       box-shadow:0 10px 22px rgba(13,20,33,.06);
+      height:100%;
     }
-
-    .mapCard iframe{width:100%;height:340px;display:block}
+    
+    .mapCard iframe{
+      width:100%;
+      height:100%;             /* fill the card */
+      min-height:340px;        /* keeps it strong visually */
+      display:block;
+      border:0;
+    }
     
     .section::before {
       content: "";
@@ -701,7 +714,7 @@
     <div class="clientsRow">
       <div class="clientBadge">
         <div class="clientLogo">
-          <img src="client-galadari.png" alt="Galadari Ventures LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
+          <img src="/client-galadari.png" alt="Galadari Ventures LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
         </div>
         <div>
           <div class="clientName">Galadari Ventures LLC</div>
@@ -711,7 +724,7 @@
 
       <div class="clientBadge">
         <div class="clientLogo">
-          <img src="client-taiyo.png" alt="Taiyo Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
+          <img src="/client-taiyo.png" alt="Taiyo Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
         </div>
         <div>
           <div class="clientName">Taiyo Middle East LLC</div>
@@ -721,7 +734,7 @@
 
       <div class="clientBadge">
         <div class="clientLogo">
-          <img src="client-structurflex.png" alt="Structurflex Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
+          <img src="/client-structurflex.png" alt="Structurflex Middle East LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
         </div>
         <div>
           <div class="clientName">Structurflex Middle East LLC</div>
@@ -731,7 +744,7 @@
 
       <div class="clientBadge">
         <div class="clientLogo">
-          <img src="client-waterinmotion.png" alt="Water in Motion LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
+          <img src="/client-waterinmotion.png" alt="Water in Motion LLC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
         </div>
         <div>
           <div class="clientName">Water in Motion LLC</div>
@@ -741,7 +754,7 @@
 
       <div class="clientBadge">
         <div class="clientLogo">
-          <img src="client-dubaiholding.png" alt="Dubai Holding logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
+          <img src="/client-dubaiholding.png" alt="Dubai Holding logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"clientFallback\">LOGO</span>';">
         </div>
         <div>
           <div class="clientName">Dubai Holding</div>
@@ -850,8 +863,6 @@
         <iframe
           src="https://www.google.com/maps?q=Burj+Al+Nahar+Complex+M2+Floor+Dubai&z=17&output=embed"
           width="100%"
-          height="340"
-          style="border:0;border-radius:18px;"
           allowfullscreen=""
           loading="lazy">
         </iframe>
