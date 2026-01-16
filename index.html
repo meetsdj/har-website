@@ -100,56 +100,75 @@
       box-shadow:0 10px 24px rgba(14,165,233,.25);
     }
 
-    /* ================= HERO ================= */
-    .hero{
-      padding:52px 0 44px; /* reduced whitespace */
-      background:
-        radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.14), transparent 55%),
-        linear-gradient(180deg, #ffffff 0%, #fbfcfe 60%, #ffffff 100%);
-      border-bottom:1px solid var(--line);
-      position:relative;
-      overflow:hidden;
-    }
-    /* Hero abstract engineering grid */
-    .hero:before{
-      content:"";
-      position:absolute;
-      right:-10%;
-      top:10%;
-      width:520px;
-      height:360px;
-      background:
-        linear-gradient(transparent 95%, rgba(15,23,42,.06) 96%),
-        linear-gradient(90deg, transparent 95%, rgba(15,23,42,.06) 96%);
-      background-size:40px 40px;
-      opacity:.25;
-      pointer-events:none;
-    }
-    .hero:after{
-      content:"";
-      position:absolute;
-      inset:auto -20% -120px -20%;
-      height:240px;
-      background:linear-gradient(90deg, rgba(14,165,233,.10), rgba(245,158,11,.08));
-      filter:blur(40px);
-      opacity:.6;
-      pointer-events:none;
-    }
-    .hero h1{
-      font-size:46px;
-      line-height:1.08;
-      letter-spacing:-0.02em;
-      font-weight:900;
-      margin:0 0 14px;
-    }
-    .hero p{
-      max-width:65ch;
-      color:var(--muted);
-      font-size:17px;
-      margin:0 0 26px;
-    }
-    .heroActions{display:flex;gap:14px;flex-wrap:wrap}
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.heroWrap{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  align-items:center;
+  gap:40px;
+  min-height:520px;
+}
+
+.heroText h1{
+  font-size:clamp(36px, 4vw, 52px);
+  line-height:1.1;
+}
+
+.heroText p{
+  max-width:560px;
+}
+
+.heroActions{
+  margin-top:28px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.heroImage{
+  position:relative;
+  border-radius:22px;
+  overflow:hidden;
+  height:420px;
+}
+
+.heroImage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 35%;
+}
+
+/* Soft architectural overlay */
+.heroImage::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,.88) 0%,
+    rgba(255,255,255,.65) 40%,
+    rgba(255,255,255,.25) 65%,
+    rgba(255,255,255,.05) 80%
+  );
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .heroWrap{
+    grid-template-columns:1fr;
+  }
+
+  .heroImage{
+    height:300px;
+    margin-top:28px;
+  }
+}
 
     /* ================= SECTIONS ================= */
     section{padding:56px 0} /* reduced whitespace */
