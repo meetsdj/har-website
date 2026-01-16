@@ -78,9 +78,6 @@
     }
     nav a:hover{background:var(--soft);color:var(--ink)}
 
-    .cta{
-      display:flex;gap:10px
-    }
     .btn{
       padding:10px 14px;
       border-radius:14px;
@@ -99,11 +96,21 @@
       border:none;
       box-shadow:0 10px 24px rgba(14,165,233,.25);
     }
+    .btn.ghost{
+  background:#fff;
+  color:var(--ink);
+}
 
 /* ================= HERO ================= */
 .hero{
   position:relative;
   overflow:hidden;
+  padding:52px 0 44px;
+  background:
+    radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.26), transparent 60%),
+    radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.22), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #fbfcfe 60%, #ffffff 100%);
+  border-bottom:1px solid var(--line);
 }
 
 .heroWrap{
@@ -160,20 +167,9 @@
   object-position:center 40%;
 }
 
-/* Soft architectural overlay */
+/* Remove haze completely */
 .heroImage::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 420px at 20% 30%, rgba(255,255,255,.72) 0%, rgba(255,255,255,.28) 55%, rgba(255,255,255,0) 78%),
-    linear-gradient(90deg,
-      rgba(255,255,255,.70) 0%,
-      rgba(255,255,255,.35) 38%,
-      rgba(255,255,255,.06) 70%,
-      rgba(255,255,255,0) 85%
-    );
-  pointer-events:none;
+  content:none !important;
 }
 
 
@@ -796,7 +792,7 @@
     <div class="cards" style="grid-template-columns:1fr; gap:18px; margin-top:18px;">
 
       <div class="card" style="display:grid; grid-template-columns:112px 1fr; gap:18px; align-items:center;">
-        <img src="leader-sujith.jpg" alt="Sujith David John"; onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
+        <img src="leader-sujith.jpg" alt="Sujith David John" onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
         <div>
           <h3 style="margin:0;">Sujith David John</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Founder & Technical Oversight</p>
@@ -805,7 +801,7 @@
       </div>
 
       <div class="card" style="display:grid; grid-template-columns:112px 1fr; gap:18px; align-items:center;">
-        <img src="leader-joyson.jpg" alt="Joyson Isac" ; onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
+        <img src="leader-joyson.jpg" alt="Joyson Isac"  onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
         <div>
           <h3 style="margin:0;">Joyson Isac</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Director – Tensile & Specialist Roofing</p>
@@ -814,7 +810,7 @@
       </div>
 
       <div class="card" style="display:grid; grid-template-columns:112px 1fr; gap:18px; align-items:center;">
-        <img src="leader-johnson.jpg" alt="Johnson David" ; onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
+        <img src="leader-johnson.jpg" alt="Johnson David"  onerror="this.onerror=null;this.src='team-placeholder.jpg';" />
         <div>
           <h3 style="margin:0;">Johnson David</h3>
           <p style="margin:4px 0 8px; font-weight:600; color:#475569;">Senior Advisor – Projects & Delivery</p>
