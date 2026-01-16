@@ -230,28 +230,141 @@
     }
     .card p{margin:0;color:var(--muted)}
 
-    /* ================= PROJECTS ================= */
-    .projects{
-      background:var(--soft);
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-    }
-    .projGrid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-    .proj{
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(15,23,42,.08);
-      background:linear-gradient(180deg,#ffffff,#fbfcfe);
-      box-shadow:0 14px 34px rgba(13,20,33,.08);
-    }
-    .proj img{width:100%;display:block}
-    .proj .meta{padding:14px}
-    .proj strong{display:block}
-    .proj span{font-size:13px;color:var(--muted)}
+   /* ================= PROJECTS ================= */
+.projects{
+  background:var(--soft);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+/* ✅ UPDATED: responsive grid (auto fits more tiles) */
+.projGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:18px;
+}
+
+.proj{
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(15,23,42,.08);
+  background:linear-gradient(180deg,#ffffff,#fbfcfe);
+  box-shadow:0 14px 34px rgba(13,20,33,.08);
+}
+.proj img{width:100%;display:block}
+.proj .meta{padding:14px}
+.proj strong{display:block}
+.proj span{font-size:13px;color:var(--muted)}
+
+/* ================= PROJECTS CAROUSEL ================= */
+.carousel{
+  position:relative;
+  border:1px solid rgba(15,23,42,.10);
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(13,20,33,.10);
+  margin:18px 0 22px;
+}
+
+.carouselTrack{
+  display:flex;
+  transition:transform 520ms cubic-bezier(.2,.9,.2,1);
+  will-change:transform;
+}
+
+.slide{
+  min-width:100%;
+  position:relative;
+  height:340px;
+  background:#fff;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(.95) contrast(1.02);
+}
+
+.slideOverlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:18px 18px 16px;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.62) 100%);
+  color:#fff;
+}
+
+.slideOverlay .kicker{
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.9;
+}
+
+.slideOverlay .title{
+  font-size:18px;
+  font-weight:900;
+  margin-top:6px;
+  line-height:1.2;
+}
+
+.slideOverlay .desc{
+  font-size:13px;
+  margin-top:6px;
+  opacity:.92;
+  max-width:72ch;
+}
+
+.carBtn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(15,23,42,.45);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+}
+.carBtn:hover{background:rgba(15,23,42,.65)}
+.carPrev{left:12px}
+.carNext{right:12px}
+
+.dots{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:12px;
+  display:flex;
+  gap:8px;
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(15,23,42,.35);
+  backdrop-filter:blur(10px);
+}
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+  border:0;
+  cursor:pointer;
+}
+.dot.active{background:#fff}
+
+@media(max-width:900px){
+  .slide{height:260px}
+}
 
     /* ================= CLIENTS STRIP ================= */
     .clientsStrip{
@@ -534,11 +647,90 @@
       <h2>Selected projects</h2>
       <p>A snapshot of our civil, roofing and engineering-led works.</p>
     </div>
-    <div class="projGrid">
-      <div class="proj"><img src="proj1.jpg" alt="Project" /><div class="meta"><strong>Galadari Ventures</strong><span>Warehouse blockwork – Dubai</span></div></div>
-      <div class="proj"><img src="proj2.jpg" alt="Project" /><div class="meta"><strong>Tensile Roofing</strong><span>Specialised fabric installation</span></div></div>
-      <div class="proj"><img src="proj3.jpg" alt="Project" /><div class="meta"><strong>Engineering Support</strong><span>Design-to-build coordination</span></div></div>
+
+    <!-- ✅ MOTION CAROUSEL (placeholders) -->
+    <div class="carousel" aria-label="Project image carousel">
+      <div class="carouselTrack" id="carTrack">
+
+        <div class="slide">
+          <img src="proj-galadari-1.jpg" alt="Galadari Ventures - warehouse blockwork and steel reinforcement" onerror="this.src='proj-placeholder.jpg'">
+          <div class="slideOverlay">
+            <div class="kicker">Project</div>
+            <div class="title">Galadari Ventures</div>
+            <div class="desc">Warehouse blockwork and steel reinforcement, Dubai</div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="proj-sas-1.jpg" alt="SAS Fabric Industries - tensile roofing canopy" onerror="this.src='proj-placeholder.jpg'">
+          <div class="slideOverlay">
+            <div class="kicker">Project</div>
+            <div class="title">SAS Fabric Industries</div>
+            <div class="desc">Tensile roofing canopy, Dubai</div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="proj-evolve-1.jpg" alt="Evolve Interiors - villa fit-out works" onerror="this.src='proj-placeholder.jpg'">
+          <div class="slideOverlay">
+            <div class="kicker">Project</div>
+            <div class="title">Evolve Interiors</div>
+            <div class="desc">Villa fit-out works, Dubai</div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="proj-structurflex-1.jpg" alt="Structurflex Middle East - steel canopy structure at Atlantis" onerror="this.src='proj-placeholder.jpg'">
+          <div class="slideOverlay">
+            <div class="kicker">Project</div>
+            <div class="title">Structurflex Middle East</div>
+            <div class="desc">Steel canopy structure, Atlantis, Dubai</div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carBtn carPrev" id="carPrev" aria-label="Previous slide">‹</button>
+      <button class="carBtn carNext" id="carNext" aria-label="Next slide">›</button>
+
+      <div class="dots" id="carDots" aria-label="Carousel navigation dots"></div>
     </div>
+
+    <!-- ✅ UPDATED TILES (4 cards) -->
+    <div class="projGrid">
+      <div class="proj">
+        <img src="proj-galadari-thumb.jpg" alt="Galadari Ventures thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
+        <div class="meta">
+          <strong>Galadari Ventures</strong>
+          <span>Warehouse blockwork and steel reinforcement, Dubai</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <img src="proj-sas-thumb.jpg" alt="SAS Fabric Industries thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
+        <div class="meta">
+          <strong>SAS Fabric Industries</strong>
+          <span>Tensile roofing canopy, Dubai</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <img src="proj-evolve-thumb.jpg" alt="Evolve Interiors thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
+        <div class="meta">
+          <strong>Evolve Interiors</strong>
+          <span>Villa fit-out works, Dubai</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <img src="proj-structurflex-thumb.jpg" alt="Structurflex Middle East thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
+        <div class="meta">
+          <strong>Structurflex Middle East</strong>
+          <span>Steel canopy structure, Atlantis, Dubai</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -743,6 +935,85 @@
 
 <script>
   document.getElementById('y').textContent=new Date().getFullYear()
+</script>
+  <script>
+  document.getElementById('y').textContent=new Date().getFullYear()
+
+  // ===== Projects Carousel =====
+  (function(){
+    const track = document.getElementById('carTrack');
+    if(!track) return;
+
+    const slides = Array.from(track.children);
+    const prev = document.getElementById('carPrev');
+    const next = document.getElementById('carNext');
+    const dotsWrap = document.getElementById('carDots');
+
+    let index = 0;
+    let timer = null;
+    const AUTOPLAY_MS = 4200;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = 'dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+      b.addEventListener('click', () => go(i, true));
+      dotsWrap.appendChild(b);
+    });
+
+    const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+    function render(){
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    function go(i, user){
+      index = (i + slides.length) % slides.length;
+      render();
+      if(user) restart();
+    }
+
+    function restart(){
+      stop();
+      start();
+    }
+
+    function start(){
+      timer = setInterval(() => go(index + 1, false), AUTOPLAY_MS);
+    }
+
+    function stop(){
+      if(timer) clearInterval(timer);
+      timer = null;
+    }
+
+    prev.addEventListener('click', () => go(index - 1, true));
+    next.addEventListener('click', () => go(index + 1, true));
+
+    // Pause on hover (desktop)
+    const carousel = track.closest('.carousel');
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+
+    // Swipe support (mobile)
+    let x0 = null;
+    carousel.addEventListener('touchstart', (e)=>{ x0 = e.touches[0].clientX; }, {passive:true});
+    carousel.addEventListener('touchend', (e)=>{
+      if(x0 === null) return;
+      const x1 = e.changedTouches[0].clientX;
+      const dx = x1 - x0;
+      if(Math.abs(dx) > 40){
+        if(dx < 0) go(index + 1, true);
+        else go(index - 1, true);
+      }
+      x0 = null;
+    }, {passive:true});
+
+    render();
+    start();
+  })();
 </script>
 </body>
 </html>
