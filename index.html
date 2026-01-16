@@ -371,57 +371,68 @@
     }
 
     /* ================= FOOTER ================= */
-    footer{padding:26px 0;border-top:1px solid rgba(15,23,42,.08)}
-    .footBrand{display:flex;gap:14px;align-items:center;justify-content:center}
-    .footBrand img{height:46px;width:auto}
+    footer{padding:26px 0;border-top:1px solid rgba(15,23,42,.08);background:#fff}
+    .footBrand{display:flex;gap:12px;align-items:center;justify-content:center}
+    .footBrand img{height:54px;width:auto}
     .footBrand .name{font-weight:900}
     .footBrand .ar{opacity:.85;direction:rtl}
-    footer small{color:var(--muted)}
+    footer small{display:block;color:var(--muted);margin-top:6px}
 
     /* ================= RESPONSIVE ================= */
-    @media (max-width:1100px){
-      .cards{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:1000px){
       .projGrid{grid-template-columns:repeat(2,1fr)}
-      .clientsRow{grid-template-columns:repeat(2,1fr)}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .stats{grid-template-columns:repeat(2,1fr)}
     }
 
     @media (max-width:900px){
-      .nav{grid-template-columns:1fr;justify-items:center}
-      nav#siteNav{justify-content:center}
-
-      .heroWrap{grid-template-columns:1fr;gap:18px}
-      h2{font-size:36px}
-
-      .stats{grid-template-columns:repeat(2,1fr)}
+      .nav{grid-template-columns:1fr;}
+      nav#siteNav{justify-content:center;flex-wrap:wrap;}
+      .heroWrap{grid-template-columns:1fr;}
+      .heroText{text-align:center}
+      .heroText p{margin-left:auto;margin-right:auto}
+      .heroActions{justify-content:center}
       .aboutGrid{grid-template-columns:1fr}
-      .cards{grid-template-columns:1fr}
-      .projGrid{grid-template-columns:1fr}
-      .clientsRow{grid-template-columns:1fr}
       .contactGrid{grid-template-columns:1fr}
+      .clientsRow{grid-template-columns:1fr}
 
-      /* Mobile nav */
-      .menuBtn{display:inline-flex}
+      /* Mobile menu behaviour */
+      .menuBtn{display:inline-flex;}
       nav#siteNav{
         width:100%;
         flex-direction:column;
+        gap:8px;
         align-items:stretch;
-        gap:6px;
+        justify-content:flex-start;
+        background:rgba(255,255,255,.96);
+        border:1px solid rgba(15,23,42,.08);
+        border-radius:18px;
+        padding:10px;
+        box-shadow:0 16px 32px rgba(13,20,33,.08);
         max-height:0;
         overflow:hidden;
-        transition:max-height .25s ease;
-        border-top:1px solid rgba(15,23,42,.08);
-        padding:0;
+        opacity:0;
+        transform:translateY(-6px);
+        transition:max-height .25s ease, opacity .2s ease, transform .2s ease;
       }
-      header.menu-open nav#siteNav{max-height:520px;padding:10px 0}
-      nav#siteNav a{padding:12px 14px;text-align:center}
+
+      header.menu-open nav#siteNav{
+        max-height:420px;
+        opacity:1;
+        transform:translateY(0);
+      }
+
+      nav#siteNav a{padding:10px 12px}
     }
 
-    @media (max-width:420px){
-      .wrap{padding:0 16px}
-      h2{font-size:32px}
+    @media (max-width:640px){
+      h2{font-size:34px}
+      .cards{grid-template-columns:1fr}
+      .projGrid{grid-template-columns:1fr}
       .brand .en{font-size:20px}
-      .brand .ar{font-size:15px}
+      .brand img{height:58px}
     }
+
   </style>
 </head>
 
@@ -461,7 +472,6 @@
   <div class="wrap heroWrap">
     <div class="heroText">
       <h1>Engineering-led building contracting in Dubai</h1>
-
       <p>
         We deliver civil construction, specialised roofing, architectural steel
         and technical building works — supported by international engineering
@@ -475,7 +485,7 @@
     </div>
 
     <div class="heroImage">
-      <img src="hero-fabric.jpg" alt="Large-span tensile roof structure, Dubai" />
+      <img src="hero-fabric.jpg" alt="Large-span tensile roof structure, Dubai">
     </div>
   </div>
 </section>
@@ -509,7 +519,7 @@
       </div>
     </div>
 
-    <div class="aboutGrid" style="margin-top:24px;">
+    <div class="aboutGrid" style="margin-top:16px;">
       <div class="box">
         <strong>Our vision</strong>
         <p>To be a trusted name in Dubai’s civil construction and specialised roofing sector, recognised for quality, precision, and professional integrity.</p>
