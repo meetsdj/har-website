@@ -29,7 +29,11 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--ink);
-      background:var(--bg);
+      /* Blue + Gold haze (HAR signature) */
+      background:
+        radial-gradient(900px 520px at 12% -10%, rgba(14,165,233,.20), transparent 60%),
+        radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.16), transparent 55%),
+        var(--bg);
       line-height:1.55;
     }
 
@@ -62,6 +66,7 @@
       align-items:center;
       gap:6px;
       text-align:center;
+      position:relative; /* anchor for mobile menu button */
     }
 
     .brand img{height:64px;width:auto}
@@ -122,11 +127,14 @@
       width:44px;
       height:44px;
       border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-      box-shadow:0 10px 24px rgba(13,20,33,.06);
+      border:1px solid rgba(14,165,233,.35);
+      background:linear-gradient(135deg, rgba(14,165,233,.10), rgba(245,158,11,.07));
+      box-shadow:
+        0 14px 28px rgba(14,165,233,.18),
+        0 12px 26px rgba(245,158,11,.10);
       align-items:center;
       justify-content:center;
+      flex-direction:column; /* vertical stack (as before) */
       gap:6px;
       padding:10px;
       cursor:pointer;
@@ -134,8 +142,8 @@
 
     .menuBtn span{
       display:block;
-      width:18px;
-      height:2px;
+      width:20px;
+      height:3px;
       border-radius:2px;
       background:#062033;
       opacity:.9;
@@ -147,9 +155,21 @@
     header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
     /* ================= SECTIONS / HEADINGS ================= */
-    section{padding:52px 0}
-    .sectionAlt{background:linear-gradient(180deg, rgba(14,165,233,.06), rgba(245,158,11,.04));}
-    .sectionTone{background:linear-gradient(180deg, rgba(14,165,233,.04), rgba(245,158,11,.03));}
+    section{padding:52px 0; position:relative}
+
+    /* Shaded separators (subtle blue+gold line) */
+    section:not(.hero)::before{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(14,165,233,.22), rgba(245,158,11,.18), transparent);
+      pointer-events:none;
+    }
+    .sectionAlt{background:linear-gradient(180deg, rgba(14,165,233,.10), rgba(245,158,11,.07));}
+    .sectionTone{background:linear-gradient(180deg, rgba(14,165,233,.08), rgba(245,158,11,.05));}
 
     .sectionHead{
       text-align:center;
@@ -324,6 +344,7 @@
 
     .teamCard img{
       width:112px;height:112px;object-fit:cover;
+      object-position:center 18%;
       border-radius:18px;
       border:1px solid rgba(15,23,42,.10);
     }
@@ -370,10 +391,12 @@
       box-shadow:0 10px 22px rgba(13,20,33,.06);
     }
 
+    .mapCard iframe{width:100%;height:340px;display:block}
+
     /* ================= FOOTER ================= */
     footer{padding:26px 0;border-top:1px solid rgba(15,23,42,.08);background:#fff}
-    .footBrand{display:flex;gap:12px;align-items:center;justify-content:center}
-    .footBrand img{height:54px;width:auto}
+    .footBrand{display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center}
+    .footBrand img{height:50px;width:auto}
     .footBrand .name{font-weight:900}
     .footBrand .ar{opacity:.85;direction:rtl}
     footer small{display:block;color:var(--muted);margin-top:6px}
@@ -395,9 +418,15 @@
       .aboutGrid{grid-template-columns:1fr}
       .contactGrid{grid-template-columns:1fr}
       .clientsRow{grid-template-columns:1fr}
+      .mapCard iframe{height:300px}
 
       /* Mobile menu behaviour */
-      .menuBtn{display:inline-flex;}
+      .menuBtn{
+        display:inline-flex;
+        position:absolute;
+        right:18px;
+        top:18px;
+      }
       nav#siteNav{
         width:100%;
         flex-direction:column;
@@ -594,7 +623,7 @@
 
     <div class="projGrid">
       <div class="proj">
-        <div class="projMedia" data-images="proj-galadari-01.jpg,proj-galadari-02.jpg,proj-galadari-03.jpg">
+        <div class="projMedia" data-images="proj-galadari-01.jpg,proj-galadari-02.jpg">
           <img src="proj-galadari-01.jpg" alt="Galadari Ventures" onerror="this.onerror=null;this.src='proj-placeholder.jpg';">
           <div class="projDots"></div>
         </div>
@@ -799,11 +828,11 @@
         <iframe
           title="Burj Al Nahar Complex Map"
           width="100%"
-          height="360"
+          height="340"
           style="border:0"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=Burj%20Al%20Nahar%20Complex%20Muteena%20Dubai&output=embed">
+          src="https://www.google.com/maps?q=Burj%20Al%20Nahar%20Complex%20M2%20Floor%20Muteena%20Dubai&z=17&output=embed">
         </iframe>
       </div>
     </div>
