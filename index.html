@@ -731,6 +731,63 @@ header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-7px) rotate(-
 
 /* Kill any accidental white wash overlay no matter where it appears */
 .heroImage::after{ content:none !important; }
+    /* ===== Menu button (final) ===== */
+.menuBtn{
+  display:none;
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  border:1.5px solid rgba(14,165,233,.45);
+  background:#fff;
+  box-shadow:0 8px 22px rgba(14,165,233,.18), 0 0 0 3px rgba(14,165,233,.08);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;    /* <- vertical stack */
+  gap:5px;
+  padding:10px;
+  cursor:pointer;
+}
+
+.menuBtn span{
+  display:block;
+  width:20px;
+  height:3px;               /* bolder */
+  background:var(--blue);
+  border-radius:3px;
+  transition:transform .18s ease, opacity .18s ease;
+}
+
+@media (max-width:900px){
+  .menuBtn{ display:inline-flex !important; }
+}
+
+/* Open state animation */
+header.menu-open .menuBtn{
+  background:linear-gradient(135deg,var(--blue),#38bdf8);
+}
+header.menu-open .menuBtn span{ background:#062033; }
+header.menu-open .menuBtn span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+header.menu-open .menuBtn span:nth-child(2){ opacity:0; }
+header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+    /* ===== Tagline row alignment ===== */
+.taglineRow{
+  display:flex;
+  align-items:center;
+  justify-content:center; /* desktop center */
+  gap:10px;
+  width:100%;
+}
+
+@media (max-width:900px){
+  .taglineRow{
+    justify-content:center;   /* keep centered at 320px */
+    flex-wrap:wrap;           /* avoid pushing text left */
+    text-align:center;
+  }
+  .taglineRow .tagline{
+    flex:0 1 auto;
+  }
+}
   </style>
 </head>
 
