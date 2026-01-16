@@ -665,6 +665,72 @@ header .nav{ position:relative; }
   header.menu-open .menuBtn span:nth-child(2){ opacity:0; }
   header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
 } 
+    /* ===== Tagline row + hamburger placement (Option A) ===== */
+.taglineRow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+}
+
+@media (max-width:900px){
+  /* Make tagline + menu sit on one line, balanced */
+  .taglineRow{
+    justify-content:space-between;
+  }
+}
+
+/* Hamburger button (bolder + HAR cyan accent) */
+.menuBtn{
+  display:none;              /* desktop hidden */
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  border:1.5px solid rgba(14,165,233,.45);
+  background:#fff;
+  box-shadow:0 8px 22px rgba(14,165,233,.18), 0 0 0 3px rgba(14,165,233,.08);
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+
+.menuBtn span{
+  display:block;
+  width:20px;
+  height:3px;               /* bolder */
+  background:var(--blue);
+  border-radius:2px;
+  transition:transform .18s ease, opacity .18s ease;
+}
+
+/* Mobile: show button */
+@media (max-width:900px){
+  .menuBtn{ display:inline-flex !important; }
+}
+
+/* Open state */
+header.menu-open .menuBtn{
+  background:linear-gradient(135deg,var(--blue),#38bdf8);
+}
+header.menu-open .menuBtn span{ background:#062033; }
+header.menu-open .menuBtn span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+header.menu-open .menuBtn span:nth-child(2){ opacity:0; }
+header.menu-open .menuBtn span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+    /* ===== Hero accents + zero haze (final authority) ===== */
+.hero{
+  background:
+    radial-gradient(900px 520px at 12% 10%, rgba(14,165,233,.26), transparent 60%),
+    radial-gradient(900px 520px at 88% 0%, rgba(245,158,11,.22), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #fbfcfe 60%, #ffffff 100%);
+  border-bottom:1px solid var(--line);
+}
+
+/* Kill any accidental white wash overlay no matter where it appears */
+.heroImage::after{ content:none !important; }
   </style>
 </head>
 
@@ -676,13 +742,16 @@ header .nav{ position:relative; }
       <img src="har-logo.png" alt="HAR logo" />
       <div class="en">Himayat Alrabi Building Contracting L.L.C</div>
       <div class="ar">حماية الربيع لمقاولات البناء ذ.م.م</div>
-      <div class="tagline">On-ground excellence. International expertise.</div>
+      <div class="taglineRow">
+  <div class="tagline">On-ground excellence. International expertise.</div>
+
+  <button class="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+    <span></span><span></span><span></span>
+  </button>
+</div>
     </div>
 
-    <!-- Mobile hamburger -->
-    <button class="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
-      <span></span><span></span><span></span>
-    </button>
+   
 
     <!-- Single (non-nested) nav -->
     <nav id="siteNav">
