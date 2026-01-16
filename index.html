@@ -857,7 +857,35 @@ h3{ margin: 0 0 10px; }
   /* optional: slightly tighter lines on small screens */
   .teamCard .desc{ line-height:1.55; }
 }
+/* ===== Global Section Heading Pattern ===== */
+.section-head {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 36px;
+  padding: 0 16px;
+}
 
+.section-head h2 {
+  margin: 0 0 12px;
+}
+
+.section-head p {
+  margin: 0 auto;
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* tighten on mobile */
+@media (max-width: 768px) {
+  .section-head {
+    margin-bottom: 28px;
+  }
+
+  .section-head h2 {
+    margin-bottom: 10px;
+  }
+}
   </style>
 </head>
 
@@ -962,12 +990,14 @@ h3{ margin: 0 0 10px; }
   </div>
 </section>
 
-<section id="services" class="sectionTone">
-  <div class="wrap">
-    <div class="sectionHead">
-      <h2>Services</h2>
-      <p>Engineering-led contracting services supported by specialist technical and site execution capabilities.</p>
-    </div>
+<section id="services" class="section">
+  <div class="section-head">
+    <h2>Services</h2>
+    <p>
+      Engineering-led contracting services supported by specialist technical
+      and site execution capabilities.
+    </p>
+  </div>
 
     <h3 style="margin:40px 0 18px; text-align:center; font-weight:800;">Primary Contracting Services</h3>
     <div style="max-width:220px; height:3px; margin:8px auto 22px; background:linear-gradient(90deg, rgba(14,165,233,.35), rgba(245,158,11,.35)); border-radius:4px;"></div>
