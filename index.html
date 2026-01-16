@@ -251,6 +251,42 @@
   background:linear-gradient(180deg,#ffffff,#fbfcfe);
   box-shadow:0 14px 34px rgba(13,20,33,.08);
 }
+.projMedia{
+  position:relative;
+  height:170px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.projMedia img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:opacity 260ms ease;
+}
+
+.projDots{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  display:flex;
+  gap:6px;
+  padding:7px 9px;
+  border-radius:999px;
+  background:rgba(15,23,42,.35);
+  backdrop-filter:blur(10px);
+}
+
+.projDot{
+  width:7px;height:7px;border-radius:999px;
+  background:rgba(255,255,255,.55);
+}
+.projDot.active{background:#fff}
+
+.projMeta{ padding:14px; }
+.projMeta strong{display:block}
+.projMeta span{font-size:13px;color:var(--muted)}
 .proj img{width:100%;display:block}
 .proj .meta{padding:14px}
 .proj strong{display:block}
@@ -724,40 +760,52 @@
 
     <!-- ✅ UPDATED TILES (4 cards) -->
     <div class="projGrid">
-      <div class="proj">
-        <img src="proj-galadari-thumb.jpg" alt="Galadari Ventures thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
-        <div class="meta">
-          <strong>Galadari Ventures</strong>
-          <span>Warehouse blockwork and steel reinforcement, Dubai</span>
-        </div>
-      </div>
 
-      <div class="proj">
-        <img src="proj-sas-thumb.jpg" alt="SAS Fabric Industries thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
-        <div class="meta">
-          <strong>SAS Fabric Industries</strong>
-          <span>Tensile roofing canopy, Dubai</span>
-        </div>
-      </div>
-
-      <div class="proj">
-        <img src="proj-evolve-thumb.jpg" alt="Evolve Interiors thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
-        <div class="meta">
-          <strong>Evolve Interiors</strong>
-          <span>Villa fit-out works, Dubai</span>
-        </div>
-      </div>
-
-      <div class="proj">
-        <img src="proj-structurflex-thumb.jpg" alt="Structurflex Middle East thumbnail" onerror="this.src='proj-placeholder.jpg'"/>
-        <div class="meta">
-          <strong>Structurflex Middle East</strong>
-          <span>Steel canopy structure, Atlantis, Dubai</span>
-        </div>
-      </div>
+  <div class="proj">
+    <div class="projMedia" data-images="proj-galadari-01.jpg,proj-galadari-02.jpg,proj-galadari-03.jpg">
+      <img src="proj-galadari-01.jpg" alt="Galadari Ventures" onerror="this.onerror=null;this.src='proj-placeholder.jpg';">
+      <div class="projDots"></div>
     </div>
-
+    <div class="projMeta">
+      <strong>Galadari Ventures</strong>
+      <span>Warehouse blockwork and steel reinforcement, Dubai</span>
+    </div>
   </div>
+
+  <div class="proj">
+    <div class="projMedia" data-images="proj-sas-01.jpg,proj-sas-02.jpg">
+      <img src="proj-sas-01.jpg" alt="SAS Fabric Industries" onerror="this.onerror=null;this.src='proj-placeholder.jpg';">
+      <div class="projDots"></div>
+    </div>
+    <div class="projMeta">
+      <strong>SAS Fabric Industries</strong>
+      <span>Tensile roofing canopy, Dubai</span>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="projMedia" data-images="proj-evolve-01.jpg,proj-evolve-02.jpg">
+      <img src="proj-evolve-01.jpg" alt="Evolve Interiors" onerror="this.onerror=null;this.src='proj-placeholder.jpg';">
+      <div class="projDots"></div>
+    </div>
+    <div class="projMeta">
+      <strong>Evolve Interiors</strong>
+      <span>Villa fit-out works, Dubai</span>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="projMedia" data-images="proj-structurflex-01.jpg,proj-structurflex-02.jpg">
+      <img src="proj-structurflex-01.jpg" alt="Structurflex Middle East" onerror="this.onerror=null;this.src='proj-placeholder.jpg';">
+      <div class="projDots"></div>
+    </div>
+    <div class="projMeta">
+      <strong>Structurflex Middle East</strong>
+      <span>Steel canopy structure, Atlantis, Dubai</span>
+    </div>
+  </div>
+
+</div>
 </section>
 
 <!-- ✅ NEW: OUR CLIENTS STRIP (logos + names fallback) -->
@@ -1039,6 +1087,78 @@
 
     render();
     start();
+  })();
+</script>
+  <script>
+  // Per-card mini carousels (independent)
+  (function(){
+    const cards = document.querySelectorAll('.projMedia[data-images]');
+    const INTERVAL_MS = 2600;
+
+    cards.forEach((wrap) => {
+      const img = wrap.querySelector('img');
+      const dotsWrap = wrap.querySelector('.projDots');
+      const list = (wrap.getAttribute('data-images') || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      if (!img || list.length <= 1) {
+        // still render 1 dot if you want, but we can skip
+        if (dotsWrap && list.length === 1) {
+          dotsWrap.innerHTML = '<span class="projDot active"></span>';
+        }
+        return;
+      }
+
+      let idx = 0;
+      let t = null;
+
+      // dots
+      dotsWrap.innerHTML = '';
+      list.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'projDot' + (i === 0 ? ' active' : '');
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function render(){
+        img.style.opacity = '0.35';
+        setTimeout(() => {
+          img.src = list[idx];
+          img.onerror = function(){
+            this.onerror = null;
+            this.src = 'proj-placeholder.jpg';
+          };
+          img.style.opacity = '1';
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }, 140);
+      }
+
+      function next(){
+        idx = (idx + 1) % list.length;
+        render();
+      }
+
+      function start(){
+        if (t) return;
+        t = setInterval(next, INTERVAL_MS);
+      }
+
+      function stop(){
+        if (!t) return;
+        clearInterval(t);
+        t = null;
+      }
+
+      // pause on hover
+      wrap.addEventListener('mouseenter', stop);
+      wrap.addEventListener('mouseleave', start);
+
+      // start cycling
+      start();
+    });
   })();
 </script>
 </body>
