@@ -1054,212 +1054,190 @@
   </div>
 </footer>
 
-<script>
-  // Footer year
-  document.getElementById('y').textContent = new Date().getFullYear();
+  <!-- ✅ Your scripts MUST end first -->
+  <script>
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Mobile menu toggle
-  (function(){
-    const header = document.querySelector('header');
-    const btn = document.querySelector('.menuBtn');
-    const nav = document.getElementById('siteNav');
-    if(!btn || !nav || !header) return;
+    // Mobile menu toggle
+    (function(){
+      const header = document.querySelector('header');
+      const btn = document.querySelector('.menuBtn');
+      const nav = document.getElementById('siteNav');
+      if(!btn || !nav || !header) return;
 
-    function setOpen(isOpen){
-      header.classList.toggle('menu-open', isOpen);
-      btn.setAttribute('aria-expanded', String(isOpen));
-      btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    }
-
-    btn.addEventListener('click', () => {
-      const open = header.classList.contains('menu-open');
-      setOpen(!open);
-    });
-
-    // Close menu on link click
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
-
-    // Close on outside click (mobile)
-    document.addEventListener('click', (e) => {
-      if(window.matchMedia('(max-width: 900px)').matches){
-        if(!header.contains(e.target)) setOpen(false);
+      function setOpen(isOpen){
+        header.classList.toggle('menu-open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
       }
-    });
 
-    // Reset if resized to desktop
-    window.addEventListener('resize', () => {
-      if(!window.matchMedia('(max-width: 900px)').matches) setOpen(false);
-    });
-  })();
-
-  // Project mini carousel dots (sync per card)
-  (function(){
-    const medias = document.querySelectorAll('.projMedia[data-images]');
-    medias.forEach(media => {
-      const imgEl = media.querySelector('img');
-      const dotsWrap = media.querySelector('.projDots');
-      const images = (media.getAttribute('data-images') || '').split(',').map(s => s.trim()).filter(Boolean);
-      if(!imgEl || !dotsWrap || images.length <= 1) return;
-
-      let idx = 0;
-      const dots = images.map((_, i) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = i === 0 ? 'active' : '';
-        b.addEventListener('click', () => {
-          idx = i;
-          render();
-        });
-        dotsWrap.appendChild(b);
-        return b;
+      btn.addEventListener('click', () => {
+        const open = header.classList.contains('menu-open');
+        setOpen(!open);
       });
 
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+
+      document.addEventListener('click', (e) => {
+        if(window.matchMedia('(max-width: 900px)').matches){
+          if(!header.contains(e.target)) setOpen(false);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if(!window.matchMedia('(max-width: 900px)').matches) setOpen(false);
+      });
+    })();
+
+    // Project mini carousel dots (sync per card)
+    (function(){
+      const medias = document.querySelectorAll('.projMedia[data-images]');
+      medias.forEach(media => {
+        const imgEl = media.querySelector('img');
+        const dotsWrap = media.querySelector('.projDots');
+        const images = (media.getAttribute('data-images') || '').split(',').map(s => s.trim()).filter(Boolean);
+        if(!imgEl || !dotsWrap || images.length <= 1) return;
+
+        let idx = 0;
+        const dots = images.map((_, i) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = i === 0 ? 'active' : '';
+          b.addEventListener('click', () => { idx = i; render(); });
+          dotsWrap.appendChild(b);
+          return b;
+        });
+
+        function render(){
+          imgEl.src = images[idx];
+          dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+        }
+
+        setInterval(() => {
+          idx = (idx + 1) % images.length;
+          render();
+        }, 4000);
+      });
+    })();
+
+    // ✅ Project Lightbox (image-only)
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const btnPrev = document.getElementById('lbPrev');
+      const btnNext = document.getElementById('lbNext');
+      const btnClose = document.getElementById('lbClose');
+
+      if(!lb || !lbImg || !btnPrev || !btnNext || !btnClose) return;
+
+      let images = [];
+      let idx = 0;
+
+      function setButtons(){
+        const showNav = images.length > 1;
+        btnPrev.style.display = showNav ? 'flex' : 'none';
+        btnNext.style.display = showNav ? 'flex' : 'none';
+      }
+
       function render(){
-        imgEl.src = images[idx];
-        dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+        if(!images.length) return;
+        lbImg.src = images[idx];
+        setButtons();
       }
 
-      // auto cycle (all cards use same interval)
-      setInterval(() => {
-        idx = (idx + 1) % images.length;
+      function openLightbox(imgList, startIndex){
+        images = imgList || [];
+        idx = Math.max(0, Math.min(startIndex || 0, images.length - 1));
         render();
-      }, 4000);
-    });
-  })();
-  // Project Lightbox (image-only)
-(function(){
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lbImg');
-  const btnPrev = document.getElementById('lbPrev');
-  const btnNext = document.getElementById('lbNext');
-  const btnClose = document.getElementById('lbClose');
-
-  if(!lb || !lbImg || !btnPrev || !btnNext || !btnClose) return;
-
-  let images = [];
-  let idx = 0;
-  let lastActiveEl = null;
-
-  function setButtons(){
-    const showNav = images.length > 1;
-    btnPrev.style.display = showNav ? 'flex' : 'none';
-    btnNext.style.display = showNav ? 'flex' : 'none';
-  }
-
-  function render(){
-    if(!images.length) return;
-    lbImg.src = images[idx];
-    setButtons();
-  }
-
-  function openLightbox(imgList, startIndex, activeEl){
-    images = imgList || [];
-    idx = Math.max(0, Math.min(startIndex || 0, images.length - 1));
-    lastActiveEl = activeEl || null;
-
-    render();
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // prevent background scroll
-    btnClose.focus();
-  }
-
-  function closeLightbox(){
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if(lastActiveEl) lastActiveEl.focus();
-  }
-
-  function next(){ idx = (idx + 1) % images.length; render(); }
-  function prev(){ idx = (idx - 1 + images.length) % images.length; render(); }
-
-  // Click any project media to open
-  document.querySelectorAll('.projMedia').forEach(media => {
-    media.addEventListener('click', (e) => {
-      const imgEl = media.querySelector('img');
-      if(!imgEl) return;
-
-      const list = (media.getAttribute('data-images') || '')
-        .split(',')
-        .map(s => s.trim())
-        .filter(Boolean);
-
-      // Fallback: if no data-images, use current image
-      const imgList = list.length ? list : [imgEl.getAttribute('src')];
-
-      // Determine start index based on current displayed image
-      const currentSrc = imgEl.getAttribute('src');
-      const startIndex = Math.max(0, imgList.indexOf(currentSrc));
-
-      openLightbox(imgList, startIndex, media);
-    });
-
-    // keyboard accessibility
-    media.setAttribute('tabindex', '0');
-    media.addEventListener('keydown', (ev) => {
-      if(ev.key === 'Enter' || ev.key === ' '){
-        ev.preventDefault();
-        media.click();
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        btnClose.focus();
       }
-    });
-  });
 
-  // Controls
-  btnNext.addEventListener('click', () => images.length > 1 && next());
-  btnPrev.addEventListener('click', () => images.length > 1 && prev());
-  btnClose.addEventListener('click', closeLightbox);
+      function closeLightbox(){
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
 
-  // Click outside image closes
-  lb.addEventListener('click', (e) => {
-    if(e.target === lb) closeLightbox();
-  });
+      function next(){ idx = (idx + 1) % images.length; render(); }
+      function prev(){ idx = (idx - 1 + images.length) % images.length; render(); }
 
-  // ESC / arrows
-  document.addEventListener('keydown', (e) => {
-    if(!lb.classList.contains('open')) return;
+      document.querySelectorAll('.projMedia').forEach(media => {
+        media.addEventListener('click', () => {
+          const imgEl = media.querySelector('img');
+          if(!imgEl) return;
 
-    if(e.key === 'Escape') closeLightbox();
-    if(images.length > 1 && e.key === 'ArrowRight') next();
-    if(images.length > 1 && e.key === 'ArrowLeft') prev();
-  });
+          const list = (media.getAttribute('data-images') || '')
+            .split(',')
+            .map(s => s.trim())
+            .filter(Boolean);
 
-  // Swipe on mobile
-  let sx = 0, sy = 0, touching = false;
-  lbImg.addEventListener('touchstart', (e) => {
-    if(!lb.classList.contains('open')) return;
-    touching = true;
-    sx = e.touches[0].clientX;
-    sy = e.touches[0].clientY;
-  }, {passive:true});
+          const imgList = list.length ? list : [imgEl.getAttribute('src')];
+          const currentSrc = imgEl.getAttribute('src');
+          const startIndex = Math.max(0, imgList.indexOf(currentSrc));
 
-  lbImg.addEventListener('touchend', (e) => {
-    if(!touching || images.length <= 1) return;
-    touching = false;
-    const ex = (e.changedTouches[0] || {}).clientX || sx;
-    const ey = (e.changedTouches[0] || {}).clientY || sy;
-    const dx = ex - sx;
-    const dy = ey - sy;
+          openLightbox(imgList, startIndex);
+        });
 
-    // horizontal swipe threshold
-    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
-      if(dx < 0) next();
-      else prev();
-    }
-  }, {passive:true});
-})();
+        media.setAttribute('tabindex', '0');
+        media.addEventListener('keydown', (ev) => {
+          if(ev.key === 'Enter' || ev.key === ' '){
+            ev.preventDefault();
+            media.click();
+          }
+        });
+      });
 
+      btnNext.addEventListener('click', () => images.length > 1 && next());
+      btnPrev.addEventListener('click', () => images.length > 1 && prev());
+      btnClose.addEventListener('click', closeLightbox);
 
-<!-- Project Lightbox (image-only) -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Project image viewer">
-    <button class="lbBtn lbPrev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
-    <img class="lightboxImg" id="lbImg" alt="Project image preview" />
-    <button class="lbBtn lbNext" id="lbNext" type="button" aria-label="Next image">›</button>
-    <button class="lbBtn lbClose" id="lbClose" type="button" aria-label="Close">✕</button>
+      lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+
+      document.addEventListener('keydown', (e) => {
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') closeLightbox();
+        if(images.length > 1 && e.key === 'ArrowRight') next();
+        if(images.length > 1 && e.key === 'ArrowLeft') prev();
+      });
+
+      let sx=0, sy=0, touching=false;
+      lbImg.addEventListener('touchstart', (e) => {
+        if(!lb.classList.contains('open')) return;
+        touching = true;
+        sx = e.touches[0].clientX;
+        sy = e.touches[0].clientY;
+      }, {passive:true});
+
+      lbImg.addEventListener('touchend', (e) => {
+        if(!touching || images.length <= 1) return;
+        touching = false;
+        const ex = (e.changedTouches[0] || {}).clientX || sx;
+        const ey = (e.changedTouches[0] || {}).clientY || sy;
+        const dx = ex - sx;
+        const dy = ey - sy;
+
+        if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+          if(dx < 0) next(); else prev();
+        }
+      }, {passive:true});
+    })();
+  </script>
+
+  <!-- ✅ Lightbox HTML MUST be OUTSIDE the script -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Project image viewer">
+      <button class="lbBtn lbPrev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
+      <img class="lightboxImg" id="lbImg" alt="Project image preview" />
+      <button class="lbBtn lbNext" id="lbNext" type="button" aria-label="Next image">›</button>
+      <button class="lbBtn lbClose" id="lbClose" type="button" aria-label="Close">✕</button>
+    </div>
   </div>
-</div>
-</script>
-</div>
+</body>
+</html>
+
 </body>
 </html>
