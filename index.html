@@ -736,6 +736,36 @@
   /* shave a bit more top padding from hero on small screens */
   .hero{ padding-top: 12px; }
 }
+
+/* ===== FINAL MOBILE HEADER COMPACTION ===== */
+@media (max-width: 900px){
+
+  header{
+    padding-bottom: 6px;   /* reduce header tail */
+  }
+
+  .nav{
+    padding: 8px 0 6px;    /* tighter vertical rhythm */
+  }
+
+  .taglineRow{
+    margin-bottom: 0;     /* kill hidden spacing */
+  }
+
+  /* Pull hero upward */
+  .hero{
+    margin-top: -10px;    /* IMPORTANT */
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 900px){
+  .taglineRow .tagline{
+    line-height: 1.15;
+    margin-top: 2px;
+  }
+}
+    
   </style>
 </head>
 
