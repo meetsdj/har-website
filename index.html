@@ -1053,6 +1053,15 @@
     </div>
   </div>
 </footer>
+       <!-- ✅ Lightbox HTML MUST be OUTSIDE the script -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Project image viewer">
+      <button class="lbBtn lbPrev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
+      <img class="lightboxImg" id="lbImg" alt="Project image preview" />
+      <button class="lbBtn lbNext" id="lbNext" type="button" aria-label="Next image">›</button>
+      <button class="lbBtn lbClose" id="lbClose" type="button" aria-label="Close">✕</button>
+    </div>
+  </div>
 
   <!-- ✅ Your scripts MUST end first -->
   <script>
@@ -1225,19 +1234,9 @@
         }
       }, {passive:true});
     })();
-  </script>
+ 
 
-  <!-- ✅ Lightbox HTML MUST be OUTSIDE the script -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Project image viewer">
-      <button class="lbBtn lbPrev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
-      <img class="lightboxImg" id="lbImg" alt="Project image preview" />
-      <button class="lbBtn lbNext" id="lbNext" type="button" aria-label="Next image">›</button>
-      <button class="lbBtn lbClose" id="lbClose" type="button" aria-label="Close">✕</button>
-    </div>
-  </div>
-</body>
-</html>
+  </script>
 
 </body>
 </html>
