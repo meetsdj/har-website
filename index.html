@@ -572,6 +572,85 @@
         transform: scale(.99);
       }
     }
+/* ================= PROJECT LIGHTBOX (Image-only) ================= */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(11,18,32,.86); /* ink-tinted */
+  backdrop-filter: blur(6px);
+}
+
+.lightbox.open{ display:flex; }
+
+.lightboxInner{
+  position:relative;
+  width:min(1100px, 96vw);
+  height:min(78vh, 720px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.lightboxImg{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  border-radius:18px;
+  box-shadow: 0 22px 60px rgba(0,0,0,.35);
+  background:#fff;
+}
+
+/* Controls */
+.lbBtn{
+  position:absolute;
+  top:14px;
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+}
+
+.lbBtn:hover{ background:rgba(255,255,255,.16); }
+.lbClose{ right:14px; }
+.lbPrev, .lbNext{
+  top:50%;
+  transform:translateY(-50%);
+  width:46px;
+  height:64px;
+  border-radius:16px;
+  font-size:28px;
+}
+.lbPrev{ left:10px; }
+.lbNext{ right:10px; }
+
+@media (max-width:640px){
+  .lightboxInner{
+    width:96vw;
+    height:82vh;
+  }
+  .lbPrev, .lbNext{
+    width:42px;
+    height:58px;
+  }
+}
+
+/* Make project images feel clickable */
+.projMedia{ cursor: zoom-in; }
 
   </style>
 </head>
@@ -619,7 +698,7 @@
       </p>
 
       <div class="heroActions">
-        <a href="mailto:info@har.ae" class="btn primary">Request a quote</a>
+        <a href="mailto:contact@hartechs.com" class="btn primary">Request a quote</a>
         <a href="tel:+971501798483" class="btn">Call +971 50 179 8483</a>
       </div>
     </div>
@@ -939,6 +1018,7 @@
         </p>
         <p>
           <strong>Phone:</strong> <a href="tel:+971501798483">+971 50 179 8483</a><br/>
+          <strong>Office:</strong> +971 4 255 6412<br/>
           <strong>Email:</strong> <a href="mailto:contact@hartechs.com">contact@hartechs.com</a>
         </p>
         <div class="heroActions">
@@ -1046,7 +1126,138 @@
       }, 4000);
     });
   })();
-</script>
+  // Project Lightbox (image-only)
+(function(){
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const btnPrev = document.getElementById('lbPrev');
+  const btnNext = document.getElementById('lbNext');
+  const btnClose = document.getElementById('lbClose');
 
+  if(!lb || !lbImg || !btnPrev || !btnNext || !btnClose) return;
+
+  let images = [];
+  let idx = 0;
+  let lastActiveEl = null;
+
+  function setButtons(){
+    const showNav = images.length > 1;
+    btnPrev.style.display = showNav ? 'flex' : 'none';
+    btnNext.style.display = showNav ? 'flex' : 'none';
+  }
+
+  function render(){
+    if(!images.length) return;
+    lbImg.src = images[idx];
+    setButtons();
+  }
+
+  function openLightbox(imgList, startIndex, activeEl){
+    images = imgList || [];
+    idx = Math.max(0, Math.min(startIndex || 0, images.length - 1));
+    lastActiveEl = activeEl || null;
+
+    render();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+    btnClose.focus();
+  }
+
+  function closeLightbox(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if(lastActiveEl) lastActiveEl.focus();
+  }
+
+  function next(){ idx = (idx + 1) % images.length; render(); }
+  function prev(){ idx = (idx - 1 + images.length) % images.length; render(); }
+
+  // Click any project media to open
+  document.querySelectorAll('.projMedia').forEach(media => {
+    media.addEventListener('click', (e) => {
+      const imgEl = media.querySelector('img');
+      if(!imgEl) return;
+
+      const list = (media.getAttribute('data-images') || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      // Fallback: if no data-images, use current image
+      const imgList = list.length ? list : [imgEl.getAttribute('src')];
+
+      // Determine start index based on current displayed image
+      const currentSrc = imgEl.getAttribute('src');
+      const startIndex = Math.max(0, imgList.indexOf(currentSrc));
+
+      openLightbox(imgList, startIndex, media);
+    });
+
+    // keyboard accessibility
+    media.setAttribute('tabindex', '0');
+    media.addEventListener('keydown', (ev) => {
+      if(ev.key === 'Enter' || ev.key === ' '){
+        ev.preventDefault();
+        media.click();
+      }
+    });
+  });
+
+  // Controls
+  btnNext.addEventListener('click', () => images.length > 1 && next());
+  btnPrev.addEventListener('click', () => images.length > 1 && prev());
+  btnClose.addEventListener('click', closeLightbox);
+
+  // Click outside image closes
+  lb.addEventListener('click', (e) => {
+    if(e.target === lb) closeLightbox();
+  });
+
+  // ESC / arrows
+  document.addEventListener('keydown', (e) => {
+    if(!lb.classList.contains('open')) return;
+
+    if(e.key === 'Escape') closeLightbox();
+    if(images.length > 1 && e.key === 'ArrowRight') next();
+    if(images.length > 1 && e.key === 'ArrowLeft') prev();
+  });
+
+  // Swipe on mobile
+  let sx = 0, sy = 0, touching = false;
+  lbImg.addEventListener('touchstart', (e) => {
+    if(!lb.classList.contains('open')) return;
+    touching = true;
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, {passive:true});
+
+  lbImg.addEventListener('touchend', (e) => {
+    if(!touching || images.length <= 1) return;
+    touching = false;
+    const ex = (e.changedTouches[0] || {}).clientX || sx;
+    const ey = (e.changedTouches[0] || {}).clientY || sy;
+    const dx = ex - sx;
+    const dy = ey - sy;
+
+    // horizontal swipe threshold
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) next();
+      else prev();
+    }
+  }, {passive:true});
+})();
+
+</script>
+<!-- Project Lightbox (image-only) -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Project image viewer">
+    <button class="lbBtn lbPrev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
+    <img class="lightboxImg" id="lbImg" alt="Project image preview" />
+    <button class="lbBtn lbNext" id="lbNext" type="button" aria-label="Next image">›</button>
+    <button class="lbBtn lbClose" id="lbClose" type="button" aria-label="Close">✕</button>
+  </div>
+</div>
 </body>
 </html>
