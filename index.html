@@ -535,7 +535,7 @@
       .cards{grid-template-columns:1fr}
       .projGrid{grid-template-columns:1fr}
       .brand .en{font-size:20px}
-      .brand img{height:58px}
+      .brand img{height:52px}
     }
     @media (max-width:768px){
   iframe { height: 300px; }
@@ -714,6 +714,27 @@
 }
 .contactCard p a:not(.btn):hover{
   border-bottom-color: rgba(14,165,233,.55);
+}
+
+/* ================= MOBILE HEADER TIGHTENING =================
+   Reduce dead white space between header and hero on mobile
+*/
+@media (max-width: 900px){
+  .nav{ padding: 10px 0; }            /* was 14px */
+  .brand{ gap: 4px; }
+  .brand img{ height: 52px; }
+  .brand .en{ font-size: 20px; line-height: 1.15; }
+  .brand .ar{ font-size: 14px; line-height: 1.2; }
+  .taglineRow{ margin-top: 2px; gap: 10px; }
+  .taglineRow .tagline{ font-size: 12px; }
+
+  /* keep hamburger snug to the top-right */
+  .menuBtn{ top: 14px; right: 14px; }
+}
+
+@media (max-width: 768px){
+  /* shave a bit more top padding from hero on small screens */
+  .hero{ padding-top: 12px; }
 }
   </style>
 </head>
