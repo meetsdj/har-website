@@ -385,9 +385,34 @@
         text-align:center;
         gap:14px;
       }
+    
 
       .teamCard > div{width:100%;max-width:560px}
     }
+    /* ===== Mobile hero spacing fix ===== */
+@media (max-width: 768px){
+  .hero{
+    padding-top: 18px;   /* was 34px */
+    padding-bottom: 16px; /* was 28px */
+  }
+
+  .heroWrap{
+    gap: 16px; /* reduce vertical gap */
+  }
+
+  .heroText p{
+    margin-bottom: 14px;
+  }
+}
+    @media (max-width: 768px){
+  header{
+    padding-bottom: 4px;
+  }
+
+  .brand img{
+    height: 54px; /* was 58px */
+  }
+}
 
     /* ================= CONTACT ================= */
     .contactGrid{
