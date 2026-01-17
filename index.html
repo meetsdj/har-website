@@ -389,28 +389,10 @@
 
       .teamCard > div{width:100%;max-width:560px}
     }
-    /* ===== Mobile hero spacing fix ===== */
-@media (max-width: 768px){
-  .hero{
-    padding-top: 18px;   /* was 34px */
-    padding-bottom: 16px; /* was 28px */
-  }
 
-  .heroWrap{
-    gap: 16px; /* reduce vertical gap */
-  }
-
-  .heroText p{
-    margin-bottom: 14px;
-  }
-}
     @media (max-width: 768px){
   header{
-    padding-bottom: 4px;
-  }
-
-  .brand img{
-    height: 54px; /* was 58px */
+    padding-bottom: 0px;
   }
 }
 
@@ -485,8 +467,11 @@
     }
 
     @media (max-width:900px){
-      .nav{grid-template-columns:1fr;}
-      nav#siteNav{justify-content:center;flex-wrap:wrap;}
+      .nav{grid-template-columns:1fr; position:relative; padding:10px 0;}
+      .brand{gap:4px;}
+      .brand img{height:52px;}
+      .taglineRow{margin-top:2px;}
+      .taglineRow .tagline{line-height:1.15;}
       .heroWrap{grid-template-columns:1fr;}
       .heroText{text-align:center}
       .heroText p{margin-left:auto;margin-right:auto}
@@ -503,25 +488,38 @@
         right:18px;
         top:18px;
       }
+      /* IMPORTANT: keep the collapsed menu from consuming vertical space */
       nav#siteNav{
+        position:absolute;
+        left:0;
+        right:0;
+        top:100%;
+        margin-top:10px;
+
         width:100%;
+        display:flex;
         flex-direction:column;
         gap:8px;
         align-items:stretch;
         justify-content:flex-start;
-        background:rgba(255,255,255,.96);
-        border:1px solid rgba(15,23,42,.08);
-        border-radius:18px;
-        padding:10px;
-        box-shadow:0 16px 32px rgba(13,20,33,.08);
+
+        /* closed state: zero box */
         max-height:0;
+        padding:0;
+        border:0;
+        box-shadow:none;
         overflow:hidden;
         opacity:0;
         transform:translateY(-6px);
         transition:max-height .25s ease, opacity .2s ease, transform .2s ease;
+        background:rgba(255,255,255,.96);
+        border-radius:18px;
       }
 
       header.menu-open nav#siteNav{
+        border:1px solid rgba(15,23,42,.08);
+        padding:10px;
+        box-shadow:0 16px 32px rgba(13,20,33,.08);
         max-height:420px;
         opacity:1;
         transform:translateY(0);
@@ -715,57 +713,6 @@
 .contactCard p a:not(.btn):hover{
   border-bottom-color: rgba(14,165,233,.55);
 }
-
-/* ================= MOBILE HEADER TIGHTENING =================
-   Reduce dead white space between header and hero on mobile
-*/
-@media (max-width: 900px){
-  .nav{ padding: 10px 0; }            /* was 14px */
-  .brand{ gap: 4px; }
-  .brand img{ height: 52px; }
-  .brand .en{ font-size: 20px; line-height: 1.15; }
-  .brand .ar{ font-size: 14px; line-height: 1.2; }
-  .taglineRow{ margin-top: 2px; gap: 10px; }
-  .taglineRow .tagline{ font-size: 12px; }
-
-  /* keep hamburger snug to the top-right */
-  .menuBtn{ top: 14px; right: 14px; }
-}
-
-@media (max-width: 768px){
-  /* shave a bit more top padding from hero on small screens */
-  .hero{ padding-top: 12px; }
-}
-
-/* ===== FINAL MOBILE HEADER COMPACTION ===== */
-@media (max-width: 900px){
-
-  header{
-    padding-bottom: 6px;   /* reduce header tail */
-  }
-
-  .nav{
-    padding: 8px 0 6px;    /* tighter vertical rhythm */
-  }
-
-  .taglineRow{
-    margin-bottom: 0;     /* kill hidden spacing */
-  }
-
-  /* Pull hero upward */
-  .hero{
-    margin-top: -10px;    /* IMPORTANT */
-    padding-top: 10px;
-  }
-}
-
-@media (max-width: 900px){
-  .taglineRow .tagline{
-    line-height: 1.15;
-    margin-top: 2px;
-  }
-}
-    
   </style>
 </head>
 
